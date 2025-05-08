@@ -13,6 +13,10 @@ Route::get('/home', function () {
 
 
 Route::prefix('categories')->group(function () {
+    Route::get('/', [
+        'as' => 'categories.index',
+        'uses' => 'App\Http\Controllers\CategoryController@index'
+    ]);
     Route::get('/create', [
         'as' => 'categories.create',
         'uses' => 'App\Http\Controllers\CategoryController@create'
