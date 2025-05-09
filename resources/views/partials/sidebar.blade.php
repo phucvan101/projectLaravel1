@@ -24,12 +24,26 @@
         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
+
+        <!-- Category Products -->
         <li class="nav-item">
           <a href="{{route('categories.index')}}" class="nav-link">
             <i class="nav-icon fas fa-th"></i>
             <p>
               Category Products
               <span class="right badge badge-danger">New</span>
+            </p>
+          </a>
+        </li>
+
+
+
+        <!-- Menu -->
+        <li class="nav-item">
+          <a href="{{route('menus.index')}}" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Menus
             </p>
           </a>
         </li>
