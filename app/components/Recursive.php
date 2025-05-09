@@ -12,13 +12,18 @@ class Recursive
     {
         $this->data = $data; // gắn biến data vào đối tượng đã khởi tạo 
     }
-    public function categoryRecursive($id = 0, $text = '')
+    public function categoryRecursive($parentId, $id = 0, $text = '')
     {
 
         foreach ($this->data as $value) {
             if ($value['parent_id'] == $id) {
-                $this->htmlSelect .= "<option value='{$value['id']}'>" . $text . $value['name'] . "</option>";
-                $this->categoryRecursive($value['id'], text: $text . '-');
+                // // Nếu phân cấp tới đúng category đang chỉnh sửa thì thêm thuộc tính selected
+                if (!empty($parentId) && $parentId == $value['id']) {
+                    $this->htmlSelect .= "<option selected value='{$value['id']}'>" . $text . $value['name'] . "</option>"; // selected là thuộc tính được sử dụng để chỉ định một mục trong danh sách đã chọn là mục mặc định được chọn khi trang được tải.
+                } else {
+                    $this->htmlSelect .= "<option value='{$value['id']}'>" . $text . $value['name'] . "</option>";
+                }
+                $this->categoryRecursive($parentId, $value['id'], text: $text . '-');
             }
         }
         return $this->htmlSelect;

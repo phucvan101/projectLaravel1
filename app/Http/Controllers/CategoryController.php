@@ -18,10 +18,7 @@ class CategoryController extends Controller
     // hàm này sẽ được gọi khi người dùng truy cập vào đường dẫn categories/create
     public function create()
     {
-        $data = $this->category->all(); // lấy tất cả dữ liệu từ bảng category
-
-        $recursive = new Recursive($data); // tạo đối tượng để sử dụng hàm đệ quy
-        $htmlOption = $recursive->categoryRecursive();
+        $htmlOption = $this->getCategory($parentId = ''); // lấy danh sách category cha
         return view('category.add', compact('htmlOption'));
     }
 
@@ -45,8 +42,34 @@ class CategoryController extends Controller
         return redirect()->route('categories.index');
     }
 
+    // hàm create mới
+    public function getCategory($parentId)
+    {
+        $data = $this->category->all(); // lấy tất cả dữ liệu từ bảng category
+
+        $recursive = new Recursive($data); // tạo đối tượng để sử dụng hàm đệ quy
+        $htmlOption = $recursive->categoryRecursive($parentId);
+        return $htmlOption;
+    }
+
     // hàm này sẽ được gọi khi người dùng gửi dữ liệu từ form sửa category
-    public function edit($id) {}
+    public function edit($id)
+    {
+        $category = $this->category->find($id); // tìm category theo id
+        $htmlOption = $this->getCategory($category->parent_id); // lấy danh sách category cha
+        return view('category.edit', compact(['htmlOption', 'category']));
+    }
+
+    // hàm này sẽ được gọi khi người dùng gửi dữ liệu từ form sửa category
+    public function update($id)
+    {
+        $this->category->find($id)->update([
+            'name' => request()->name,
+            'parent_id' => request()->parent_id,
+            'slug' => Str::slug(request()->name)
+        ]);
+        return redirect()->route('categories.index');
+    }
 
     // hàm này sẽ được gọi khi người dùng gửi dữ liệu từ form xóa category
     public function delete() {}
