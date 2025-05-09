@@ -26,7 +26,8 @@ class CategoryController extends Controller
     // hàm này sẽ được gọi khi người dùng truy cập vào đường dẫn categories
     public function index()
     {
-        $categories = $this->category->latest()->paginate(5);
+        $categories = $this->category->paginate(5);
+        // dd($categories);
 
         return view('category.index', compact('categories'));
     }
@@ -72,5 +73,9 @@ class CategoryController extends Controller
     }
 
     // hàm này sẽ được gọi khi người dùng gửi dữ liệu từ form xóa category
-    public function delete() {}
+    public function delete($id)
+    {
+        $this->category->find($id)->delete();
+        return redirect()->route('categories.index');
+    }
 }

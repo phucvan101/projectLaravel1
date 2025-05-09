@@ -44,7 +44,7 @@
                     </table>
                 </div>
                 <div class="col-md-12">
-                    {{$categories->links()}}
+                    {{$categories->links(("pagination::bootstrap-4"))}}
                 </div>
             </div>
         </div>
