@@ -15,6 +15,7 @@ class CategoryController extends Controller
         $this->category = $category;
     }
 
+    // hàm này sẽ được gọi khi người dùng truy cập vào đường dẫn categories/create
     public function create()
     {
         $data = $this->category->all(); // lấy tất cả dữ liệu từ bảng category
@@ -25,12 +26,15 @@ class CategoryController extends Controller
     }
 
 
-
+    // hàm này sẽ được gọi khi người dùng truy cập vào đường dẫn categories
     public function index()
     {
-        return view('category.index');
+        $categories = $this->category->latest()->paginate(5);
+
+        return view('category.index', compact('categories'));
     }
 
+    // hàm này sẽ được gọi khi người dùng gửi dữ liệu từ form tạo mới category
     public function store(Request $request)
     {
         $this->category->create([
@@ -40,4 +44,10 @@ class CategoryController extends Controller
         ]);
         return redirect()->route('categories.index');
     }
+
+    // hàm này sẽ được gọi khi người dùng gửi dữ liệu từ form sửa category
+    public function edit($id) {}
+
+    // hàm này sẽ được gọi khi người dùng gửi dữ liệu từ form xóa category
+    public function delete() {}
 }

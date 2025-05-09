@@ -9,11 +9,8 @@
 
 @section('content')
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     @include('partials.content-header', ['name' => 'Category', 'key' => 'Add'])
-    <!-- /.content-header -->
 
-    <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -39,9 +36,8 @@
                     </form>
                 </div>
             </div>
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
+        </div>
     </div>
-    <!-- /.content -->
+
 </div>
 @endsection
