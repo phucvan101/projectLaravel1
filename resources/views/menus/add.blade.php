@@ -27,9 +27,9 @@
                             <label>Select menu</label>
 
                             <select class="form-control" name="parent_id">
-                                <option value="0">Select Parent Category</option>
+                                <option value="0">Select Parent Menu</option>
                                 <!--view dữ liệu ra -->
-
+                                {!!$optionSelect!!}
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
