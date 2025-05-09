@@ -4,52 +4,40 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Components\Recursive;
+use Illuminate\Support\Str; // thư viện hỗ trợ các hàm xử lý chuỗi trong laravel
 
 class CategoryController extends Controller
 {
-    private $htmlSelect;
-    public function __construct()
+    private $category;
+    public function __construct(Category $category) // Sử dụng Dependency Injection để khởi tạo model Category.  
     {
-        $this->htmlSelect = '';
+        $this->category = $category;
     }
 
     public function create()
     {
+        $data = $this->category->all(); // lấy tất cả dữ liệu từ bảng category
 
-        // $data = Category::all();
-        // foreach ($data as $value) {
-        //     if ($value['parent_id'] === 0) {
-        //         echo "<option>" . $value['name'] . "</option>";
-        //         foreach ($data as $value2) {
-        //             if ($value2['parent_id'] == $value['id']) {
-        //                 echo "<option>" . $value2['name'] . "</option>";
-        //                 foreach ($data as $value3) {
-        //                     if ($value3['parent_id'] == $value2['id']) {
-        //                         echo "<option>" . $value3['name'] . "</option>";
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
-        $htmlOption = $this->categoryRecursive(0);
+        $recursive = new Recursive($data); // tạo đối tượng để sử dụng hàm đệ quy
+        $htmlOption = $recursive->categoryRecursive();
         return view('category.add', compact('htmlOption'));
     }
 
-    function categoryRecursive($id, $text = '')
-    {
-        $data = Category::all();
-        foreach ($data as $value) {
-            if ($value['parent_id'] == $id) {
-                $this->htmlSelect .= "<option>" . $text . $value['name'] . "</option>";
-                $this->categoryRecursive($value['id'], text: $text . '-');
-            }
-        }
-        return $this->htmlSelect;
-    }
+
 
     public function index()
     {
         return view('category.index');
+    }
+
+    public function store(Request $request)
+    {
+        $this->category->create([
+            'name' => $request->name,
+            'parent_id' => $request->parent_id,
+            'slug' => Str::slug($request->name)
+        ]);
+        return redirect()->route('categories.index');
     }
 }

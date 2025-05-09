@@ -21,4 +21,8 @@ Route::prefix('categories')->group(function () {
         'as' => 'categories.create',
         'uses' => 'App\Http\Controllers\CategoryController@create'
     ]);
+    Route::post('/store', [
+        'as' => 'categories.store',
+        'uses' => 'App\Http\Controllers\CategoryController@store'
+    ]);
 });

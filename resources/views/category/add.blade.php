@@ -18,16 +18,18 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
-                    <form>
+                    <form action="{{route('categories.store')}}" method="POST">
+                        @csrf
                         <div class="form-group">
                             <label>Category Name</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter category">
+                            <input type="text" class="form-control" name="name" placeholder="Enter category name">
 
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleFormControlSelect1">Select category</label>
-                            <select class="form-control">
+                            <label>Select category</label>
+
+                            <select class="form-control" name="parent_id">
                                 <option value="0">Select Parent Category</option>
                                 <!--view dữ liệu ra -->
                                 {!!$htmlOption!!}
