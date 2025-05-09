@@ -29,10 +29,8 @@
                             <label for="exampleFormControlSelect1">Select category</label>
                             <select class="form-control">
                                 <option value="0">Select Parent Category</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                                <!--view dữ liệu ra -->
+                                {!!$htmlOption!!}
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
