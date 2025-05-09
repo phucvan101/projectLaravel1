@@ -28,12 +28,21 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                            @foreach($menus as $menu)
+                            <tr>
+                                <th scope="row">{{$menu->id}}</th>
+                                <td>{{$menu->name}}</td>
+                                <td>
+                                    <a href="" class="btn btn-default">Edit</a>
+                                    <a href="" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
                 <div class="col-md-12">
-
+                    {{$menus->links(("pagination::bootstrap-4"))}}
                 </div>
             </div>
         </div>

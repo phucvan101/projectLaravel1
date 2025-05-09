@@ -3,22 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Components\MenuRecursive; // sử dụng class MenuRecursive để lấy danh sách menu
+use App\Models\Menu; // sử dụng class Menu để tương tác với bảng menu
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
     private $menuRecursive;
-    public function __construct(MenuRecursive $menuRecursive)
+    private $menu;
+    public function __construct(MenuRecursive $menuRecursive, Menu $menu)
     {
         $this->menuRecursive = $menuRecursive;
+        $this->menu = $menu;
     }
 
 
     //Giao diện menu 
     public function index()
     {
-        // dd('Menu index');
-        return view('menus.index');
+        $menus = $this->menu->paginate(5);
+        return view('menus.index', compact('menus'));
     }
 
     //Giao diện tạo menu
@@ -30,6 +33,10 @@ class MenuController extends Controller
 
     public function store()
     {
-        $this->Menu
+        $this->menu->create([
+            'name' => request()->name,
+            'parent_id' => request()->parent_id,
+        ]);
+        return redirect()->route('menus.index');
     }
 }
