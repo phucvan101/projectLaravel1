@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Components\MenuRecursive; // sử dụng class MenuRecursive để lấy danh sách menu
 use App\Models\Menu; // sử dụng class Menu để tương tác với bảng menu
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Str; // thư viện hỗ trợ các hàm xử lý chuỗi trong laravel
 
 class MenuController extends Controller
 {
@@ -35,7 +37,8 @@ class MenuController extends Controller
     {
         $this->menu->create([
             'name' => request()->name,
-            'parent_id' => request()->parent_id,
+            'slug' => Str::slug(request()->name), // tạo slug từ tên menu
+            'slug' => Str::slug(request()->name), // tạo slug từ tên menu
         ]);
         return redirect()->route('menus.index');
     }
