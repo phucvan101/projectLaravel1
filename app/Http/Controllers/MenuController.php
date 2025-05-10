@@ -37,9 +37,18 @@ class MenuController extends Controller
     {
         $this->menu->create([
             'name' => request()->name,
-            'slug' => Str::slug(request()->name), // tạo slug từ tên menu
+            'parent_id' => request()->parent_id, // tạo parent_id từ tên menu
             'slug' => Str::slug(request()->name), // tạo slug từ tên menu
         ]);
         return redirect()->route('menus.index');
+    }
+
+    // update menu 
+    public function edit($id)
+    {
+        $menuFollowEdit = $this->menu->find($id);
+        $optionSelect = $this->menuRecursive->menuRecursiveEdit($menuFollowEdit->parent_id);
+        return view('menus.edit', compact(['menuFollowEdit', 'optionSelect']));
+        // dd($optionSelect);
     }
 }
