@@ -2,9 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'AdminController@loginAdmin');
 
 
 Route::get('/home', function () {
@@ -64,5 +62,9 @@ Route::prefix('menus')->group(function () {
     Route::post('/update/{id}', [
         'as' => 'menus.update',
         'uses' => 'App\Http\Controllers\MenuController@update'
+    ]);
+    Route::get('/delete/{id}', [
+        'as' => 'menus.delete',
+        'uses' => 'App\Http\Controllers\MenuController@delete'
     ]);
 });

@@ -61,4 +61,11 @@ class MenuController extends Controller
         ]);
         return redirect()->route('menus.index');
     }
+
+    // Xóa menu
+    public function delete($id)
+    {
+        $this->menu->find($id)->delete();
+        return redirect()->route('menus.index');
+    }
 }
