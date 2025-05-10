@@ -51,4 +51,14 @@ class MenuController extends Controller
         return view('menus.edit', compact(['menuFollowEdit', 'optionSelect']));
         // dd($optionSelect);
     }
+
+    public function update($id)
+    {
+        $this->menu->find($id)->update([
+            'name' => request()->name,
+            'parent_id' => request()->parent_id,
+            'slug' => Str::slug(request()->name),
+        ]);
+        return redirect()->route('menus.index');
+    }
 }
