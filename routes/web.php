@@ -70,4 +70,12 @@ Route::prefix('admin')->group(function () {
             'uses' => 'App\Http\Controllers\MenuController@delete'
         ]);
     });
+
+    // Route: Product
+    Route::prefix('products')->group(function () {
+        Route::get('/', [
+            'as' => 'products.index',
+            'uses' => 'App\Http\Controllers\AdminProductController@index'
+        ]);
+    });
 });
