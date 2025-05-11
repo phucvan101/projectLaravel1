@@ -19,7 +19,7 @@ class CategoryController extends Controller
     public function create()
     {
         $htmlOption = $this->getCategory($parentId = ''); // lấy danh sách category cha
-        return view('category.add', compact('htmlOption'));
+        return view('admin.category.add', compact('htmlOption'));
     }
 
 
@@ -29,7 +29,7 @@ class CategoryController extends Controller
         $categories = $this->category->paginate(5);
         // dd($categories);
 
-        return view('category.index', compact('categories'));
+        return view('admin.category.index', compact('categories'));
     }
 
     // hàm này sẽ được gọi khi người dùng gửi dữ liệu từ form tạo mới category
@@ -58,7 +58,7 @@ class CategoryController extends Controller
     {
         $category = $this->category->find($id); // tìm category theo id
         $htmlOption = $this->getCategory($category->parent_id); // lấy danh sách category cha
-        return view('category.edit', compact(['htmlOption', 'category']));
+        return view('admin.category.edit', compact(['htmlOption', 'category']));
     }
 
     // hàm này sẽ được gọi khi người dùng gửi dữ liệu từ form sửa category
