@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'AdminController@loginAdmin');
-
+Route::get('/', 'App\Http\Controllers\AdminController@loginAdmin');
+Route::post('/', 'App\Http\Controllers\AdminController@postLoginAdmin');
 
 Route::get('/home', function () {
     return view('home');
