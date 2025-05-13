@@ -72,7 +72,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Content</label>
-                            <textarea name="content" class="form-control tinymce_editor_init" rows="8"></textarea>
+                            <textarea name="content" class="form-control tinymce_editor_init" rows="12"></textarea>
                         </div>
                     </div>
                     <div class="col-md-12">
