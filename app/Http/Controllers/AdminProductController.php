@@ -36,4 +36,11 @@ class AdminProductController extends Controller
         $htmlOption = $recursive->categoryRecursive($parentId);
         return $htmlOption;
     }
+
+    // lưu vào database
+    public function store()
+    {
+        $fileName = request()->feature_image_path->getClientOriginalName(); // tên gốc ảnh từ file trên máy tính
+        $path = request()->file('feature_image_path')->storeAs('public/product', $fileName); // up ảnh 
+    }
 }

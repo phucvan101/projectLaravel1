@@ -4,7 +4,7 @@
 <!-- load file admin roi dua vao phan content -->
 
 @section('title')
-<title>Home</title>
+<title>Menu add</title>
 @endsection
 
 @section('content')
@@ -40,3 +40,5 @@
     </div>
 
 </div>
+
+@endsection
