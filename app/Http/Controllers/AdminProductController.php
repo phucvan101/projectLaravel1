@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Components\Recursive;
+use App\Traits\StorageImageTrait;
+use Illuminate\Support\Str;
+use Storage;
 
 class AdminProductController extends Controller
 {
     //
+    use StorageImageTrait;
     private $category;
     public function __construct(Category $category)
     {
@@ -40,7 +44,7 @@ class AdminProductController extends Controller
     // lưu vào database
     public function store()
     {
-        $fileName = request()->feature_image_path->getClientOriginalName(); // tên gốc ảnh từ file trên máy tính
-        $path = request()->file('feature_image_path')->storeAs('public/product', $fileName); // up ảnh 
+        $data = $this->storageTraitUpload('feature_image_path', 'product');
+        dd($data);
     }
 }
