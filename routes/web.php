@@ -73,6 +73,9 @@ Route::prefix('admin')->group(function () {
 
     // Route: Product
     Route::prefix('products')->group(function () {
+        Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+            \UniSharp\LaravelFilemanager\Lfm::routes();
+        });
         Route::get('/', [
             'as' => 'products.index',
             'uses' => 'App\Http\Controllers\AdminProductController@index'
