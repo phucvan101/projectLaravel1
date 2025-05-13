@@ -53,7 +53,7 @@
                         <div class="form-group">
                             <label>Select category</label>
 
-                            <select class="form-control select2_init" name="parent_id">
+                            <select class="form-control select2_init" name="category_id">
                                 <option value="">Select Category</option>
                                 <!--view dữ liệu ra -->
                                 {!!$htmlOption!!}

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('price');
             $table->string('feature_image_path')->nullable();
-            $table->text('content');
+            $table->text('content')->charset('utf8mb4')->collation('utf8mb4_unicode_ci');;
             $table->integer('user_id');
             $table->integer('category_id');
             $table->timestamps();
