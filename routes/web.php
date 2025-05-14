@@ -108,4 +108,20 @@ Route::prefix('admin')->group(function () {
             'uses' => 'App\Http\Controllers\AdminProductController@delete'
         ]);
     });
+
+    // Route: Slider
+    // Route::prefix('sliders')->group(function () {
+    //     Route::get('/', [
+    //         'as' => 'sliders.index',
+    //         'users' => 'App\Http\Controllers\SliderAdminController@index'
+    //     ]);
+    // });
+
+    // Route: Product
+    Route::prefix('sliders')->group(function () {
+        Route::get('/', [
+            'as' => 'sliders.index',
+            'uses' => 'App\Http\Controllers\SliderAdminController@index'
+        ]);
+    });
 });
