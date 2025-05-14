@@ -46,4 +46,30 @@ class SliderAdminController extends Controller
             Log::error('Error: ' . $exception->getMessage() . ' ---line' . $exception->getLine());
         }
     }
+
+    // chỉnh sửa slider
+    public function edit($id)
+    {
+        $slider = $this->slider->find($id);
+        return view('admin.slider.edit', compact('slider'));
+    }
+    public function update($id)
+    {
+        try {
+            $dataUpdate = [
+                'name' => request()->name,
+                'description' => request()->description,
+
+            ];
+            $dataImageSlider = $this->storageTraitUpload('image_path', 'slider');
+            if (!empty($dataImageSlider)) {
+                $dataUpdate['image_name'] = $dataImageSlider['file_name'];
+                $dataUpdate['image_path'] = $dataImageSlider['file_path'];
+            };
+            $this->slider->find($id)->update($dataUpdate);
+            return redirect()->route('sliders.index');
+        } catch (Exception $exception) {
+            Log::error('Error: ' . $exception->getMessage() . ' ---line' . $exception->getLine());
+        }
+    }
 }
