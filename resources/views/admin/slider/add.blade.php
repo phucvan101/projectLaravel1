@@ -38,11 +38,11 @@
 
                         <div class="form-group">
                             <label>Description</label>
-                            <input
-                                type="text"
-                                class="form-control @error('description') is-invalid @enderror"
+                            <textarea
                                 name="description"
-                                placeholder="Enter description" value="{{old('description')}}">
+                                rows="8"
+                                class="form-control @error('description') is-invalid @enderror"> {{old('description')}}
+                            </textarea>
                             @error('description')
                             <div class="alert alert-danger">{{$message}}</div>
                             @enderror
