@@ -72,4 +72,22 @@ class SliderAdminController extends Controller
             Log::error('Error: ' . $exception->getMessage() . ' ---line' . $exception->getLine());
         }
     }
+
+    // xóa slider
+    public function delete($id)
+    {
+        try {
+            $this->slider->find($id)->delete();
+            return response()->json([
+                'code' => 200,
+                'message' => 'success',
+            ], 200);
+        } catch (Exception $exception) {
+            Log::error('Message: ' . $exception->getMessage() . '...Line :' . $exception->getLine());
+            return response()->json([
+                'code' => 500,
+                'message' => 'False'
+            ], 500);
+        }
+    }
 }

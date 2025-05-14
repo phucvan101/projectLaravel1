@@ -117,7 +117,7 @@ Route::prefix('admin')->group(function () {
     //     ]);
     // });
 
-    // Route: Product
+    // Route: slider
     Route::prefix('sliders')->group(function () {
         Route::get('/', [
             'as' => 'sliders.index',
@@ -141,10 +141,16 @@ Route::prefix('admin')->group(function () {
             'uses' => 'App\Http\Controllers\SliderAdminController@edit'
         ]);
 
-        // route: update ảnh
+        // route: update slider
         Route::post('/update/{id}', [
             'as' => 'sliders.update',
             'uses' => 'App\Http\Controllers\SliderAdminController@update'
+        ]);
+
+        // route: xóa slider
+        Route::get('/delete/{id}', [
+            'as' => 'sliders.delete',
+            'uses' => 'App\Http\Controllers\SliderAdminController@delete'
         ]);
     });
 });
