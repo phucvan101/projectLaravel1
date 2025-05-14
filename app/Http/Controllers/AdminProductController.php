@@ -8,6 +8,7 @@ use App\Models\Tag;
 use App\Models\ProductTag;
 use Illuminate\Http\Request;
 use App\Components\Recursive;
+use App\Http\Requests\ProductAddRequest;
 use App\Models\ProductImage;
 use App\Traits\StorageImageTrait;
 use Exception;
@@ -60,7 +61,7 @@ class AdminProductController extends Controller
     }
 
     // lưu vào database
-    public function store()
+    public function store(ProductAddRequest $request)
     {
         try {
             DB::beginTransaction();

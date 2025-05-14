@@ -18,7 +18,17 @@
 @section('content')
 <div class="content-wrapper">
     @include('partials.content-header', ['name' => 'Product', 'key' => 'Add'])
-
+    <div class="col-mid-12">
+        @if ($errors->any()) {
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                <li>{{$error}}</li>
+                @endforeach
+        </div>
+        }
+        @endif
+    </div>
     <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
         <div class="content">
             <div class="container-fluid">
