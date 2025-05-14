@@ -37,7 +37,11 @@
                         @csrf
                         <div class="form-group">
                             <label>Product Name</label>
-                            <input type="text" class="form-control  @error('name') is-invalid @enderror" name="name" placeholder="Enter product name">
+                            <input type="text"
+                                class="form-control  @error('name') is-invalid @enderror"
+                                name="name"
+                                placeholder="Enter product name"
+                                value="{{old('name')}}">
                             @error('name')
                             <div class="alert alert-danger">{{$message}}</div>
                             @enderror
@@ -46,7 +50,11 @@
 
                         <div class="form-group">
                             <label>Product Price</label>
-                            <input type="text" class="form-control @error('price') is-invalid @enderror" name="price" placeholder="Enter product price">
+                            <input type="text"
+                                class="form-control @error('price') is-invalid @enderror"
+                                name="price"
+                                placeholder="Enter product price"
+                                value="{{old('price')}}">
                             @error('price')
                             <div class="alert alert-danger">{{$message}}</div>
                             @enderror
@@ -91,7 +99,9 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Content</label>
-                            <textarea name="content" class="form-control tinymce_editor_init @error('content') is-invalid @enderror" rows="12"></textarea>
+                            <textarea name="content" class="form-control tinymce_editor_init @error('content') is-invalid @enderror" rows="12">
+                            {{old('content')}}
+                            </textarea>
                             @error('content')
                             <div class="alert alert-danger">{{$message}}</div>
                             @enderror

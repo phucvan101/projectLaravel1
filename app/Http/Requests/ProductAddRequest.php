@@ -25,7 +25,7 @@ class ProductAddRequest extends FormRequest
             // key: rule
             'name' => 'bail|required|unique:products|max:255|min:10',
             'price' => 'required',
-            'category' => 'required',
+            'category_id' => 'required',
             'content' => 'required',
 
 
