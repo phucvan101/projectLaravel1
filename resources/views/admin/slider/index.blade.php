@@ -7,6 +7,8 @@
 <title>Home</title>
 @endsection
 
+
+
 @section('content')
 <div class="content-wrapper">
     @include('partials.content-header', ['name' => 'Slider', 'key' => 'List'])

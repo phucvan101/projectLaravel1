@@ -7,32 +7,56 @@
 <title>Slider add</title>
 @endsection
 
+@section('css')
+<link rel="styleSheet" href="{{asset('admins/slider/add/add.css')}}">
+@endsection
+
+
 @section('content')
-<div class="content-wrapper">
+<div class=" content-wrapper">
     @include('partials.content-header', ['name' => 'Slider', 'key' => 'Add'])
 
     <div class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
-                    <form action="" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('sliders.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label>Slider Name</label>
-                            <input type="text" class="form-control" name="name" placeholder="Enter menu name">
-
+                            <input
+                                type="text"
+                                class="form-control @error('name') is-invalid @enderror"
+                                name="name"
+                                placeholder="Enter menu name"
+                                value="{{old('name')}}">
+                            @error('name')
+                            <div class=" alert alert-danger">{{$message}}
+                            </div>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label>Description</label>
-                            <input type="text" class="form-control" name="description" placeholder="Enter description">
-
+                            <input
+                                type="text"
+                                class="form-control @error('description') is-invalid @enderror"
+                                name="description"
+                                placeholder="Enter description" value="{{old('description')}}">
+                            @error('description')
+                            <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label>Image</label>
-                            <input type="file" class="form-control-file" name="image_path">
-
+                            <input
+                                type="file"
+                                class="form-control-file @error('image_path') is-invalid @enderror"
+                                name="image_path" value="{{old('image_path')}}">
+                            @error('image_path')
+                            <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
