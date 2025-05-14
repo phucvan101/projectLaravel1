@@ -15,6 +15,7 @@ use Illuminate\Support\Str;
 use Storage;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\TryCatch;
 
 class AdminProductController extends Controller
 {
@@ -158,6 +159,24 @@ class AdminProductController extends Controller
         } catch (\Exception $exception) {
             DB::rollBack(); // hủy bỏ các thay đổi dữ liêu đã thực hiện trong một transaction bị lỗi 
             Log::error('Message: ' . $exception->getMessage() . '--- Line: ' . $exception->getLine());
+        }
+    }
+
+    // Xóa sản phẩm
+    public function delete($id)
+    {
+        try {
+            $this->product->find($id)->delete();
+            return response()->json([
+                'code' => 200,
+                'message' => 'success',
+            ], 200);
+        } catch (Exception $exception) {
+            Log::error('Message: ' . $exception->getMessage() . '...Line :' . $exception->getLine());
+            return response()->json([
+                'code' => 500,
+                'message' => 'False'
+            ], 500);
         }
     }
 }
