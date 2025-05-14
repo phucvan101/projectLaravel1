@@ -21,11 +21,13 @@ class Product extends Model
         // cách hoạt động: Sử dụng bảng trung gian product_tags để liên kết sản phẩm và tag, product_id: khóa ngoại trỏ đến bảng products, tag_id: khóa ngoại trỏ đến bảng tags.
     }
 
+    // một product có một category
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
 
+    // một product có nhiều image
     public function productImages()
     {
         return $this->hasMany(ProductImage::class, 'product_id');

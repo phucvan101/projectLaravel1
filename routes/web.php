@@ -26,7 +26,7 @@ Route::prefix('admin')->group(function () {
             'as' => 'categories.store',
             'uses' => 'App\Http\Controllers\CategoryController@store'
         ]);
-        Route::get('/edit/{id}', [
+        Route::get('/store/{id}', [
             'as' => 'categories.edit',
             'uses' => 'App\Http\Controllers\CategoryController@edit'
         ]);
@@ -96,6 +96,10 @@ Route::prefix('admin')->group(function () {
         Route::get('/edit/{id}', [
             'as' => 'products.edit',
             'uses' => 'App\Http\Controllers\AdminProductController@edit'
+        ]);
+        Route::post('/update/{id}', [
+            'as' => 'products.update',
+            'uses' => 'App\Http\Controllers\AdminProductController@update'
         ]);
     });
 });
