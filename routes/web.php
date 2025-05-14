@@ -123,5 +123,9 @@ Route::prefix('admin')->group(function () {
             'as' => 'sliders.index',
             'uses' => 'App\Http\Controllers\SliderAdminController@index'
         ]);
+        Route::get('/create', [
+            'as' => 'sliders.create',
+            'uses' => 'App\Http\Controllers\SliderAdminController@create'
+        ]);
     });
 });
