@@ -19,7 +19,7 @@
 <div class="content-wrapper">
     @include('partials.content-header', ['name' => 'Product', 'key' => 'Add'])
     <div class="col-mid-12">
-        @if ($errors->any()) {
+        <!-- @if ($errors->any()) {
         <div class="alert alert-danger">
             <ul>
                 @foreach($errors->all() as $error)
@@ -27,7 +27,7 @@
                 @endforeach
         </div>
         }
-        @endif
+        @endif -->
     </div>
     <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
         <div class="content">
@@ -37,13 +37,19 @@
                         @csrf
                         <div class="form-group">
                             <label>Product Name</label>
-                            <input type="text" class="form-control" name="name" placeholder="Enter product name">
+                            <input type="text" class="form-control  @error('name') is-invalid @enderror" name="name" placeholder="Enter product name">
+                            @error('name')
+                            <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
 
                         </div>
 
                         <div class="form-group">
                             <label>Product Price</label>
-                            <input type="text" class="form-control" name="price" placeholder="Enter product price">
+                            <input type="text" class="form-control @error('price') is-invalid @enderror" name="price" placeholder="Enter product price">
+                            @error('price')
+                            <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
 
                         </div>
 
@@ -63,11 +69,14 @@
                         <div class="form-group">
                             <label>Select category</label>
 
-                            <select class="form-control select2_init" name="category_id">
+                            <select class="form-control select2_init @error('category_id') is-invalid @enderror" name="category_id">
                                 <option value="">Select Category</option>
                                 <!--view dữ liệu ra -->
                                 {!!$htmlOption!!}
                             </select>
+                            @error('category_id')
+                            <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Enter tags for product</label>
@@ -82,7 +91,10 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Content</label>
-                            <textarea name="content" class="form-control tinymce_editor_init" rows="12"></textarea>
+                            <textarea name="content" class="form-control tinymce_editor_init @error('content') is-invalid @enderror" rows="12"></textarea>
+                            @error('content')
+                            <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-12">
