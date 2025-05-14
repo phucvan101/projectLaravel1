@@ -39,13 +39,13 @@
                             <tr>
                                 <th scope="row">{{$productItem -> id}}</th>
                                 <td>{{$productItem -> name}}</td>
-                                <td>{{$productItem -> price}}</td>
+                                <td>{{number_format($productItem -> price)}}</td>
                                 <td>
                                     <img class="product_image_150_100" src="{{$productItem->feature_image_path}}" alt="">
                                 </td>
-                                <td>{{$productItem->category->name}}</td>
+                                <td>{{optional($productItem->category)->name}}</td>
                                 <td>
-                                    <a href="" class="btn btn-default">
+                                    <a href="{{route('products.edit', ['id' =>$productItem->id])}}" class="btn btn-default">
                                         Edit
                                     </a>
                                     <a href="" class="btn btn-danger">Delete</a>

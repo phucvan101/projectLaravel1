@@ -80,18 +80,7 @@ Route::prefix('admin')->group(function () {
             'as' => 'products.index',
             'uses' => 'App\Http\Controllers\AdminProductController@index'
         ]);
-        // Route::prefix('products')->group(function () {
-        //     // route: create
-        //     Route::get('/create', [
-        //         'as' => 'products.create',
-        //         'uses' => 'App\Http\Controllers\AdminProductController@create'
-        //     ]);
 
-        //     Route::get('/store', [
-        //         'as' => 'products.create',
-        //         'uses' => 'App\Http\Controllers\AdminProductController@create'
-        //     ]);
-        // });
         // route: create
         Route::get('/create', [
             'as' => 'products.create',
@@ -101,6 +90,12 @@ Route::prefix('admin')->group(function () {
         Route::post('/store', [
             'as' => 'products.store',
             'uses' => 'App\Http\Controllers\AdminProductController@store'
+        ]);
+
+        // route: edit
+        Route::get('/edit/{id}', [
+            'as' => 'products.edit',
+            'uses' => 'App\Http\Controllers\AdminProductController@edit'
         ]);
     });
 });
