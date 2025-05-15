@@ -17,10 +17,12 @@ use Storage;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Stmt\TryCatch;
+use App\Traits\DeleteModelTrait;
 
 class AdminProductController extends Controller
 {
     //
+    use DeleteModelTrait;
     use StorageImageTrait;
     private $category;
     private $product;
@@ -166,18 +168,6 @@ class AdminProductController extends Controller
     // Xóa sản phẩm
     public function delete($id)
     {
-        try {
-            $this->product->find($id)->delete();
-            return response()->json([
-                'code' => 200,
-                'message' => 'success',
-            ], 200);
-        } catch (Exception $exception) {
-            Log::error('Message: ' . $exception->getMessage() . '...Line :' . $exception->getLine());
-            return response()->json([
-                'code' => 500,
-                'message' => 'False'
-            ], 500);
-        }
+        return $this->deleteModelTrait($id, $this->product);
     }
 }

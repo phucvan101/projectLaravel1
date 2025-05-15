@@ -13,7 +13,8 @@
 
 @section('js')
 <script src="{{asset('vendor/sweetAlert2/sweetalert2@11.js')}}"></script>
-<script src="{{asset('admins/product/index/list.js')}}"></script>
+<script src="{{asset('admins/main.js')}}"></script>
+
 @endsection
 
 @section('content')
