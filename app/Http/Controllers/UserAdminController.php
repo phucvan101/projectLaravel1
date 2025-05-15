@@ -8,6 +8,8 @@ use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\UserAddRequest;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class UserAdminController extends Controller
 {
@@ -34,12 +36,19 @@ class UserAdminController extends Controller
 
     public function store(UserAddRequest $request)
     {
-        $user = $this->user->create([
-            'name' => request()->name,
-            'email' => request()->email,
-            'password' => Hash::make(request()->password)
-        ]);
-        $user->roles()->attach(request()->role_id);
-        return redirect()->route('users.index');
+        try {
+            DB::beginTransaction();
+            $user = $this->user->create([
+                'name' => request()->name,
+                'email' => request()->email,
+                'password' => Hash::make(request()->password)
+            ]);
+            $user->roles()->attach(request()->role_id);
+            return redirect()->route('users.index');
+            DB::commit();
+        } catch (Exception $exception) {
+            DB::rollBack(); // hủy tất cả nếu có lỗi 
+            Log::error('Message: ' . $exception->getMessage() . '--- Line ' . $exception->getLine());
+        }
     }
 }
