@@ -8,7 +8,7 @@
 @endsection
 
 @section('css')
-<link rel="styleSheet" href="{{asset('admins/slider/add/add.css')}}">
+<link rel="styleSheet" href="{{asset('admins/main.css')}}">
 @endsection
 
 

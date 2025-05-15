@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\UserAddRequest;
 
 class UserAdminController extends Controller
 {
@@ -19,7 +22,7 @@ class UserAdminController extends Controller
 
     public function index()
     {
-        $users = $this->user->paginate(5);
+        $users = $this->user->latest()->paginate(5);
         return view('admin.user.index', compact('users'));
     }
 
@@ -27,5 +30,16 @@ class UserAdminController extends Controller
     {
         $roles = $this->role->all();
         return view('admin.user.add', compact('roles'));
+    }
+
+    public function store(UserAddRequest $request)
+    {
+        $user = $this->user->create([
+            'name' => request()->name,
+            'email' => request()->email,
+            'password' => Hash::make(request()->password)
+        ]);
+        $user->roles()->attach(request()->role_id);
+        return redirect()->route('users.index');
     }
 }
