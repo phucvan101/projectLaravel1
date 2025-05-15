@@ -160,7 +160,7 @@ Route::prefix('admin')->group(function () {
             'as' => 'settings.index',
             'uses' => 'App\Http\Controllers\AdminSettingController@index'
         ]);
-
+        // route: tạo setting
         Route::get('/create', [
             'as' => 'settings.create',
             'uses' => 'App\Http\Controllers\AdminSettingController@create'
@@ -169,6 +169,11 @@ Route::prefix('admin')->group(function () {
         Route::post('/store', [
             'as' => 'settings.store',
             'uses' => 'App\Http\Controllers\AdminSettingController@store'
+        ]);
+        // route display edit setting
+        Route::get('/edit/{id}', [
+            'as' => 'settings.edit',
+            'uses' => 'App\Http\Controllers\AdminSettingController@edit'
         ]);
     });
 });

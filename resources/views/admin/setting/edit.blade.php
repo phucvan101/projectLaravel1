@@ -1,29 +1,24 @@
-<!-- Stored in resources/views/child.blade.php -->
-
 @extends('layouts.admin')
 <!-- load file admin roi dua vao phan content -->
 
 @section('title')
-<title>Setting Add</title>
+<title>Setting Edit</title>
 @endsection
 
 @section('css')
-<link rel="stylesheet" href="{{asset('admins/setting/add/add.css')}}">
+<link rel="styleSheet" href="{{asset('admins/slider/add/add.css')}}">
 @endsection
-
-
 
 @section('content')
 <div class="content-wrapper">
-    @include('partials.content-header', ['name' => 'Setting', 'key' => 'Add'])
+    @include('partials.content-header', ['name' => 'Setting', 'key' => 'Edit'])
 
     <div class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
-                    <form action="{{route('settings.store') .'?type=' . request()->type}}" method="POST">
+                    <form action="" method="POST">
                         @csrf
-                        <!--csrf tự động chèn một csrf token vào form html -->
                         <div class="form-group">
                             <label>Config key</label>
                             <input type="text" class="form-control @error('config_key') is-invalid @enderror" name="config_key" placeholder="Enter config key" value="{{old('config_key')}}">
@@ -54,7 +49,6 @@
                             @enderror
                         </div>
                         @endif
-
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
