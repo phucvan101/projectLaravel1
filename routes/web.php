@@ -186,4 +186,12 @@ Route::prefix('admin')->group(function () {
             'uses' => 'App\Http\Controllers\AdminSettingController@delete'
         ]);
     });
+
+    // Route: users
+    Route::prefix('users')->group(function () {
+        Route::get('/', [
+            'as' => 'users.index',
+            'uses' => 'App\Http\Controllers\UserAdminController@index'
+        ]);
+    });
 });
