@@ -36,22 +36,24 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
+                                <th scope="col">Config key</th>
                                 <th scope="col">Config value</th>
                                 <th scope="col">Action</th>
 
                             </tr>
                         </thead>
                         <tbody>
-
+                            @foreach($settings as $setting)
                             <tr>
-                                <th scope="row">1</th>
-                                <td>config value</td>
+                                <th scope="row">{{$setting->id}}</th>
+                                <td>{{$setting->config_key}}</td>
+                                <td>{{$setting->config_value}}</td>
                                 <td>
                                     <a href="" class="btn btn-default">Edit</a>
                                     <a href="" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
-
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
