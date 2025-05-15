@@ -26,7 +26,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="" class="btn btn-success float-right m-2">Add</a>
+                    <a href="{{route('users.create')}}" class="btn btn-success float-right m-2">Add</a>
                 </div>
                 <div class="col-12">
                     <table class="table">
@@ -47,7 +47,7 @@
                                 <td>{{$user->email}}</td>
 
                                 <td>
-                                    <a href="" class="btn btn-default">Edit</a>
+                                    <a href="" class=" btn btn-default">Edit</a>
                                     <a href=""
                                         data-url=""
                                         class="btn btn-danger action_delete">Delete
