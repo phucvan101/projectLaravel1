@@ -17,11 +17,11 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
-                    <form action="" method="POST">
+                    <form action="{{route('settings.update', ['id' => $setting->id])}}" method="POST">
                         @csrf
                         <div class="form-group">
                             <label>Config key</label>
-                            <input type="text" class="form-control @error('config_key') is-invalid @enderror" name="config_key" placeholder="Enter config key" value="{{old('config_key')}}">
+                            <input type="text" class="form-control @error('config_key') is-invalid @enderror" name="config_key" placeholder="Enter config key" value="{{$setting->config_key}}">
                             @error('config_key')
                             <div class=" alert alert-danger">{{$message}}
                             </div>
@@ -31,7 +31,7 @@
                         @if(request()->type === 'Text')
                         <div class="form-group">
                             <label>Config Value</label>
-                            <input type="text" class="form-control @error('config_value') is-invalid @enderror" name="config_value" placeholder="Enter config value" value="{{old('config_value')}}">
+                            <input type="text" class="form-control @error('config_value') is-invalid @enderror" name="config_value" placeholder="Enter config value" value="{{$setting->config_value}}">
                             @error('config_value')
                             <div class=" alert alert-danger">{{$message}}
                             </div>
@@ -42,7 +42,7 @@
                         <div class="form-group">
                             <label>Config Value</label>
                             <textarea class="form-control @error('config_value') is-invalid @enderror" name="config_value" row="10">
-                            {{old('config_value')}}
+                            {{$setting->config_value}}
                             </textarea>
                             @error('config_value')
                             <div class="alert alert-danger">{{$message}}</div>
