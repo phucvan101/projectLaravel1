@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Permission;
 use Illuminate\Http\Request;
 use App\Models\Role;
 
@@ -9,9 +10,11 @@ class RoleAdminController extends Controller
 {
     //
     private $role;
-    public function __construct(Role $role)
+    private $permission;
+    public function __construct(Role $role, Permission $permission)
     {
         $this->role = $role;
+        $this->permission = $permission;
     }
 
     public function index()
@@ -22,6 +25,7 @@ class RoleAdminController extends Controller
 
     public function create()
     {
-        return view('admin.role.add');
+        $permissions = $this->permission->where('parent_id', 0)->get();
+        return view('admin.role.add', compact('permissions'));
     }
 }

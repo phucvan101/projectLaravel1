@@ -55,35 +55,37 @@
 
                         <div class="col-md-12">
                             <div class="row">
-                                <div class="card text-white bg-primary mb-3 col-md-12">
+                                @foreach($permissions as $permissionItem)
+                                <div class="card border-light mb-3 col-md-12">
                                     <div class="card-header">
                                         <label>
                                             <input type="checkbox" name="">
-                                            Module product
+                                            Module {{ $permissionItem->name }}
                                         </label>
                                     </div>
 
                                     <div class="row">
-                                        @for($i = 1; $i <= 4; $i++)
-                                            <div class="card-body col-md-3">
+                                        @foreach($permissionItem->permissionChildren as $permissionChildrenItem)
+                                        <div class="card-body col-md-3">
                                             <h5 class="card-title">
                                                 <label>
-                                                    <input type="checkbox" name="">
-                                                    Add product
+                                                    <input type="checkbox" name="permission_id[]" value=" {{$permissionChildrenItem->id}}">
                                                 </label>
+                                                {{$permissionChildrenItem->name}}
                                             </h5>
+                                        </div>
+                                        @endforeach
                                     </div>
-                                    @endfor
                                 </div>
+                                @endforeach
                             </div>
                         </div>
-                </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div> <!-- /.col-md-6 -->
+            </div> <!-- /.row -->
+        </div> <!-- /.container-fluid -->
+    </div> <!-- /.content -->
+</div> <!-- /.content-wrapper -->
 @endsection
