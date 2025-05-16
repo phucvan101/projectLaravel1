@@ -28,4 +28,33 @@ class RoleAdminController extends Controller
         $permissions = $this->permission->where('parent_id', 0)->get();
         return view('admin.role.add', compact('permissions'));
     }
+
+    public function store()
+    {
+        $role = $this->role->create([
+            'name' => request()->name,
+            'display_name' => request()->display_name,
+        ]);
+        $role->permissions()->attach(request()->permission_id);
+        return redirect()->route('roles.index');
+    }
+
+    public function edit($id)
+    {
+        $permissionsParent = $this->permission->where('parent_id', 0)->get();
+        $role = $this->role->find($id);
+        $permissionChecked = $role->permissions;
+        return view('admin.role.edit', compact(['permissionsParent', 'role', 'permissionChecked']));
+    }
+
+    public function update($id)
+    {
+        $role = $this->role->find($id);
+        $role->update([
+            'name' => request()->name,
+            'display_name' => request()->display_name,
+        ]);
+        $role->permissions()->sync(request()->permission_id);
+        return redirect()->route('roles.index');
+    }
 }

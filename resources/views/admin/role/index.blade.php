@@ -47,7 +47,7 @@
                                 <td>{{$role->display_name}}</td>
 
                                 <td>
-                                    <a href="" class="btn btn-default">Edit</a>
+                                    <a href="{{route('roles.edit', ['id' =>$role->id])}}" class="btn btn-default">Edit</a>
                                     <a href=""
                                         data-url=""
                                         class="btn btn-danger action_delete">Delete

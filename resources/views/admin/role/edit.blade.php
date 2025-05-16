@@ -3,7 +3,7 @@
 @extends('layouts.admin')
 
 @section('title')
-<title>Role add</title>
+<title>Role edit</title>
 @endsection
 
 @section('css')
@@ -19,13 +19,13 @@
 
 @section('content')
 <div class="content-wrapper">
-    @include('partials.content-header', ['name' => 'Role', 'key' => 'Add'])
+    @include('partials.content-header', ['name' => 'Role', 'key' => 'Edit'])
 
     <div class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
-                    <form action="{{route('roles.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('roles.update', ['id' =>$role->id])}}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="col-md-12">
@@ -36,7 +36,7 @@
                                     class="form-control @error('name') is-invalid @enderror"
                                     name="name"
                                     placeholder="Enter role name"
-                                    value="{{ old('name') }}">
+                                    value="{{$role->name}}">
                                 @error('name')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -48,7 +48,7 @@
                                     class="form-control @error('display_name') is-invalid @enderror"
                                     name="display_name"
                                     placeholder="Enter role display name"
-                                    rows="3">{{ old('display_name') }}</textarea>
+                                    rows="3">{{$role->display_name}}</textarea>
                                 @error('display_name')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -57,7 +57,7 @@
 
                         <div class="col-md-12">
                             <div class="row">
-                                @foreach($permissions as $permissionItem)
+                                @foreach($permissionsParent as $permissionItem)
                                 <div class="card border-light mb-3 col-md-12">
                                     <div class="card-header">
                                         <label>
@@ -71,7 +71,12 @@
                                         <div class="card-body col-md-3">
                                             <h5 class="card-title">
                                                 <label>
-                                                    <input type="checkbox" name="permission_id[]" value="{{$permissionChildrenItem->id}}" class="checkbox_children">
+                                                    <input
+                                                        type="checkbox"
+                                                        {{$permissionChecked->contains('id', $permissionChildrenItem->id) ? 'checked' : ''}}
+                                                        name="permission_id[]"
+                                                        value="{{$permissionChildrenItem->id}}"
+                                                        class="checkbox_children">
                                                 </label>
                                                 {{$permissionChildrenItem->name}}
                                             </h5>
