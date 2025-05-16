@@ -193,15 +193,22 @@ Route::prefix('admin')->group(function () {
             'as' => 'users.index',
             'uses' => 'App\Http\Controllers\UserAdminController@index'
         ]);
-
+        // route: display page tạo user
         Route::get('/create', [
             'as' => 'users.create',
             'uses' => 'App\Http\Controllers\UserAdminController@create'
         ]);
-
+        // route: tạo user
         Route::post('/store', [
             'as' => 'users.store',
             'uses' => 'App\Http\Controllers\UserAdminController@store'
         ]);
+        // route: display page edit user
+        Route::get('/edit/{id}', [
+            'as' => 'users.edit',
+            'uses' => 'App\Http\Controllers\UserAdminController@edit'
+        ]);
+
+        // route: 
     });
 });

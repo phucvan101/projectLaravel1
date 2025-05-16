@@ -20,7 +20,7 @@
 
 @section('content')
 <div class=" content-wrapper">
-    @include('partials.content-header', ['name' => 'User', 'key' => 'Add'])
+    @include('partials.content-header', ['name' => 'User', 'key' => 'Edit'])
 
     <div class="content">
         <div class="container-fluid">
@@ -35,7 +35,7 @@
                                 class="form-control @error('name') is-invalid @enderror"
                                 name="name"
                                 placeholder="Enter user name"
-                                value="{{old('name')}}">
+                                value="{{$user->name}}">
                             @error('name')
                             <div class=" alert alert-danger">{{$message}}
                             </div>
@@ -49,7 +49,7 @@
                                 class="form-control @error('email') is-invalid @enderror"
                                 name="email"
                                 placeholder="Enter email"
-                                value="{{old('email')}}">
+                                value="{{$user->email}}">
                             @error('email')
                             <div class=" alert alert-danger">{{$message}}
                             </div>
@@ -62,8 +62,7 @@
                                 type="password"
                                 class="form-control @error('password') is-invalid @enderror"
                                 name="password"
-                                placeholder="Enter password"
-                                value="{{old('password')}}">
+                                placeholder="Enter password">
                             @error('password')
                             <div class=" alert alert-danger">{{$message}}
                             </div>
@@ -75,7 +74,10 @@
                             <select name="role_id[]" class="form-control select2_init" multiple>
                                 <option value="">Admin</option>
                                 @foreach($roles as $role)
-                                <option value="{{$role->id}}">{{$role->name}}</option>
+                                <option
+                                    {{$rolesOfUser->contains('id', $role->id) ? 'selected' : ''}}
+                                    value="{{$role->id}}">{{$role->name}}
+                                </option>
                                 @endforeach
                             </select>
                         </div>

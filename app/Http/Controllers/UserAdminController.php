@@ -51,4 +51,12 @@ class UserAdminController extends Controller
             Log::error('Message: ' . $exception->getMessage() . '--- Line ' . $exception->getLine());
         }
     }
+
+    public function edit($id)
+    {
+        $roles = $this->role->all();
+        $user = $this->user->find($id);
+        $rolesOfUser = $user->roles;
+        return view('admin.user.edit', compact(['roles', 'user', 'rolesOfUser']));
+    }
 }
