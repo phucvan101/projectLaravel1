@@ -209,6 +209,10 @@ Route::prefix('admin')->group(function () {
             'uses' => 'App\Http\Controllers\UserAdminController@edit'
         ]);
 
-        // route: 
+        // route: update user
+        Route::post('/update/{id}', [
+            'as' => 'users.update',
+            'uses' => 'App\Http\Controllers\UserAdminController@update'
+        ]);
     });
 });

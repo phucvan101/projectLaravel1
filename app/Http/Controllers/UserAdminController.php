@@ -43,9 +43,9 @@ class UserAdminController extends Controller
                 'email' => request()->email,
                 'password' => Hash::make(request()->password)
             ]);
-            $user->roles()->attach(request()->role_id);
-            return redirect()->route('users.index');
+            $user->roles()->attach(request()->role_id); // attach dùng để thêm một hoặc nhiều bản ghi vào bảng trung gian của quan hệ n:n
             DB::commit();
+            return redirect()->route('users.index');
         } catch (Exception $exception) {
             DB::rollBack(); // hủy tất cả nếu có lỗi 
             Log::error('Message: ' . $exception->getMessage() . '--- Line ' . $exception->getLine());
@@ -58,5 +58,27 @@ class UserAdminController extends Controller
         $user = $this->user->find($id);
         $rolesOfUser = $user->roles;
         return view('admin.user.edit', compact(['roles', 'user', 'rolesOfUser']));
+    }
+
+    public function update($id)
+    {
+        try {
+            DB::beginTransaction();
+            $dataUpdate = [
+                'name' => request()->name,
+                'email' => request()->email,
+            ];
+            if (request()->filled('password')) {
+                $dataUpdate['password'] = Hash::make(request()->password);
+            }
+            $this->user->find($id)->update($dataUpdate);
+            $user = $this->user->find($id);
+            $user->roles()->sync(request()->role_id); // sync dùng để đồng bộ các bản ghi trong bảng trung gian của quan hệ n:n
+            DB::commit();
+            return redirect()->route('users.index');
+        } catch (Exception $exception) {
+            DB::rollBack(); // hủy tất cả nếu có lỗi 
+            Log::error('Message: ' . $exception->getMessage() . '--- Line ' . $exception->getLine());
+        }
     }
 }
