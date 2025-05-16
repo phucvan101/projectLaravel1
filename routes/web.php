@@ -227,5 +227,11 @@ Route::prefix('admin')->group(function () {
             'as' => 'roles.index',
             'uses' => 'App\Http\Controllers\RoleAdminController@index'
         ]);
+
+        // route : display add roles 
+        Route::get('/create', [
+            'as' => 'roles.create',
+            'uses' => 'App\Http\Controllers\RoleAdminController@create'
+        ]);
     });
 });

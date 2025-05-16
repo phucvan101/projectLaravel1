@@ -19,4 +19,9 @@ class RoleAdminController extends Controller
         $roles = $this->role->paginate();
         return view('admin.role.index', compact('roles'));
     }
+
+    public function create()
+    {
+        return view('admin.role.add');
+    }
 }
