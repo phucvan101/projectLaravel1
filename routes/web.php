@@ -214,5 +214,18 @@ Route::prefix('admin')->group(function () {
             'as' => 'users.update',
             'uses' => 'App\Http\Controllers\UserAdminController@update'
         ]);
+
+        Route::get('/delete/{id}', [
+            'as' => 'users.delete',
+            'uses' => 'App\Http\Controllers\UserAdminController@delete'
+        ]);
+    });
+
+    // Route: role
+    Route::prefix('roles')->group(function () {
+        Route::get('/', [
+            'as' => 'roles.index',
+            'uses' => 'App\Http\Controllers\RoleAdminController@index'
+        ]);
     });
 });

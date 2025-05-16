@@ -8,11 +8,13 @@ use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\UserAddRequest;
+use App\Traits\DeleteModelTrait;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
 class UserAdminController extends Controller
 {
+    use DeleteModelTrait;
     private $user;
     private $role;
 
@@ -80,5 +82,10 @@ class UserAdminController extends Controller
             DB::rollBack(); // hủy tất cả nếu có lỗi 
             Log::error('Message: ' . $exception->getMessage() . '--- Line ' . $exception->getLine());
         }
+    }
+
+    public function delete($id)
+    {
+        return $this->deleteModelTrait($id, $this->user);
     }
 }
