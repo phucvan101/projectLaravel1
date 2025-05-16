@@ -8,11 +8,13 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('admins/main.css') }}">
-<style>
-    .card-header {
-        background-color: #00e765;
-    }
-</style>
+<link rel="stylesheet" href="{{ asset('admins/role/add/add.css') }}">
+
+@endsection
+
+
+@section('js')
+<script src="{{ asset('admins/role/add/add.js') }}"></script>
 @endsection
 
 @section('content')
@@ -59,7 +61,7 @@
                                 <div class="card border-light mb-3 col-md-12">
                                     <div class="card-header">
                                         <label>
-                                            <input type="checkbox" name="">
+                                            <input type="checkbox" value="" class="checkbox_wrapper">
                                             Module {{ $permissionItem->name }}
                                         </label>
                                     </div>
@@ -69,7 +71,7 @@
                                         <div class="card-body col-md-3">
                                             <h5 class="card-title">
                                                 <label>
-                                                    <input type="checkbox" name="permission_id[]" value=" {{$permissionChildrenItem->id}}">
+                                                    <input type="checkbox" name="permission_id[]" value="{{$permissionChildrenItem->id}}" class="checkbox_children">
                                                 </label>
                                                 {{$permissionChildrenItem->name}}
                                             </h5>
