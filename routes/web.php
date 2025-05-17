@@ -16,7 +16,8 @@ Route::prefix('admin')->group(function () {
     Route::prefix('categories')->group(function () {
         Route::get('/', [
             'as' => 'categories.index',
-            'uses' => 'App\Http\Controllers\CategoryController@index'
+            'uses' => 'App\Http\Controllers\CategoryController@index',
+            'middleware' => 'can:list_category'
         ]);
         Route::get('/create', [
             'as' => 'categories.create',
@@ -45,7 +46,8 @@ Route::prefix('admin')->group(function () {
     Route::prefix('menus')->group(function () {
         Route::get('/', [
             'as' => 'menus.index',
-            'uses' => 'App\Http\Controllers\MenuController@index'
+            'uses' => 'App\Http\Controllers\MenuController@index',
+            'middleware' => 'can:list_menu'
         ]);
         Route::get('/create', [
             'as' => 'menus.create',
@@ -109,13 +111,6 @@ Route::prefix('admin')->group(function () {
         ]);
     });
 
-    // Route: Slider
-    // Route::prefix('sliders')->group(function () {
-    //     Route::get('/', [
-    //         'as' => 'sliders.index',
-    //         'users' => 'App\Http\Controllers\SliderAdminController@index'
-    //     ]);
-    // });
 
     // Route: slider
     Route::prefix('sliders')->group(function () {
