@@ -251,5 +251,11 @@ Route::prefix('admin')->group(function () {
             'as' => 'roles.update',
             'uses' => 'App\Http\Controllers\RoleAdminController@update'
         ]);
+
+        // route : delete roles 
+        Route::get('/delete/{id}', [
+            'as' => 'roles.delete',
+            'uses' => 'App\Http\Controllers\RoleAdminController@delete'
+        ]);
     });
 });
