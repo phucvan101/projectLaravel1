@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Components\Recursive;
+use App\Traits\DeleteModelTrait;
 use Illuminate\Support\Str; // thư viện hỗ trợ các hàm xử lý chuỗi trong laravel
 
 class CategoryController extends Controller
 {
+    use DeleteModelTrait;
     private $category;
     public function __construct(Category $category) // Sử dụng Dependency Injection để khởi tạo model Category.  
     {
@@ -75,7 +77,6 @@ class CategoryController extends Controller
     // hàm này sẽ được gọi khi người dùng gửi dữ liệu từ form xóa category
     public function delete($id)
     {
-        $this->category->find($id)->delete();
-        return redirect()->route('categories.index');
+        return $this->deleteModelTrait($id, $this->category);
     }
 }

@@ -7,6 +7,16 @@
 <title>Home</title>
 @endsection
 
+
+@section('css')
+<link rel="stylesheet" href="{{asset('admins/setting/index/index.css')}}">
+@endsection
+
+@section('js')
+<script src="{{asset('vendor/sweetAlert2/sweetalert2@11.js')}}"></script>
+<script src="{{asset('admins/main.js')}}"></script>
+@endsection
+
 @section('content')
 <div class="content-wrapper">
     @include('partials.content-header', ['name' => 'Category', 'key' => 'List'])
@@ -15,7 +25,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    @can('category_add')
                     <a href="{{route('categories.create')}}" class="btn btn-success float-right m-2">Add</a>
+                    @endcan
                 </div>
                 <div class="col-12">
                     <table class="table">
@@ -33,10 +45,15 @@
                                 <th scope="row">{{$category->id}}</th>
                                 <td>{{ $category->name }}</td>
                                 <td>
+                                    @can('category_edit')
                                     <a href="{{route('categories.edit', ['id' => $category->id]) }}" class="btn btn-default">
                                         Edit
                                     </a>
-                                    <a href="{{route('categories.delete',['id' => $category->id]) }}" class="btn btn-danger">Delete</a>
+                                    @endcan
+
+                                    @can('category_delete')
+                                    <a href="" data-url="{{route('categories.delete',['id' => $category->id]) }}" class="btn btn-danger action_delete">Delete</a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

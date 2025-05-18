@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Components\MenuRecursive; // sử dụng class MenuRecursive để lấy danh sách menu
 use App\Models\Menu; // sử dụng class Menu để tương tác với bảng menu
-
+use App\Traits\DeleteModelTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str; // thư viện hỗ trợ các hàm xử lý chuỗi trong laravel
 
 class MenuController extends Controller
 {
+    use DeleteModelTrait;
     private $menuRecursive;
     private $menu;
     public function __construct(MenuRecursive $menuRecursive, Menu $menu)
@@ -65,7 +66,9 @@ class MenuController extends Controller
     // Xóa menu
     public function delete($id)
     {
-        $this->menu->find($id)->delete();
-        return redirect()->route('menus.index');
+        return $this->deleteModelTrait(
+            $id,
+            $this->menu
+        );
     }
 }

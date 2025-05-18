@@ -4,7 +4,16 @@
 <!-- load file admin roi dua vao phan content -->
 
 @section('title')
-<title>Home</title>
+<title>Menu</title>
+@endsection
+
+@section('css')
+<link rel="stylesheet" href="{{asset('admins/setting/index/index.css')}}">
+@endsection
+
+@section('js')
+<script src="{{asset('vendor/sweetAlert2/sweetalert2@11.js')}}"></script>
+<script src="{{asset('admins/main.js')}}"></script>
 @endsection
 
 @section('content')
@@ -34,7 +43,7 @@
                                 <td>{{$menu->name}}</td>
                                 <td>
                                     <a href="{{route('menus.edit', ['id' => $menu->id])}}" class="btn btn-default">Edit</a>
-                                    <a href="{{route('menus.delete', ['id' =>$menu->id])}}" class="btn btn-danger">Delete</a>
+                                    <a href="" data-url="{{route('menus.delete', ['id' =>$menu->id])}}" class="btn btn-danger action_delete">Delete</a>
                                 </td>
                             </tr>
                             @endforeach
