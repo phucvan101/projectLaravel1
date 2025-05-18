@@ -22,12 +22,18 @@ class AuthServiceProvider extends ServiceProvider
     {
         //
         $this->registerPolicies();
-        Gate::define('list_category', function ($user) {
-            return $user->checkPermissionAccess(config('permissions.access.list_category'));
-        });
+        Gate::define('category_list', 'App\Policies\CategoryPolicy@view');
+        $this->registerPolicies();
+        Gate::define('category_add', 'App\Policies\CategoryPolicy@create');
+        $this->registerPolicies();
+        Gate::define('category_edit', 'App\Policies\CategoryPolicy@update');
+        $this->registerPolicies();
+        Gate::define('category_delete', 'App\Policies\CategoryPolicy@delete');
 
-        Gate::define('list_menu', function ($user) {
-            return $user->checkPermissionAccess(config('permissions.access.list_menu'));
+
+
+        Gate::define('menu_list', function ($user) {
+            return $user->checkPermissionAccess(config('permissions.access.menu_list'));
         });
     }
 }

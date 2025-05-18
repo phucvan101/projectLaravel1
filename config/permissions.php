@@ -2,8 +2,11 @@
 
 return [
     'access' => [
-        'list-category' => 'list_category',
-        'list-menu' => 'list_menu',
+        'category_list' => 'category_list',
+        'category_add' => 'category_add',
+        'category_edit' => 'category_edit',
+        'category_delete' => 'category_delete',
+        'menu_list' => 'menu_list',
     ],
     'table_module' => [
         'category',
@@ -12,6 +15,7 @@ return [
         'setting',
         'user',
         'role',
+        'menu',
         'test'
     ],
     'module_children' => [

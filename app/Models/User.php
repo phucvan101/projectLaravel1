@@ -63,6 +63,5 @@ class User extends Authenticatable
             };
         }
         return false;
-        dd($roles);
     }
 }
