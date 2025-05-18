@@ -84,7 +84,9 @@ Route::prefix('admin')->group(function () {
         });
         Route::get('/', [
             'as' => 'products.index',
-            'uses' => 'App\Http\Controllers\AdminProductController@index'
+            'uses' => 'App\Http\Controllers\AdminProductController@index',
+            'middleware' => 'can:product_list'
+
         ]);
 
         // route: create
@@ -101,7 +103,9 @@ Route::prefix('admin')->group(function () {
         // route: edit
         Route::get('/edit/{id}', [
             'as' => 'products.edit',
-            'uses' => 'App\Http\Controllers\AdminProductController@edit'
+            'uses' => 'App\Http\Controllers\AdminProductController@edit',
+            'middleware' => 'can:product_edit,id'
+
         ]);
         Route::post('/update/{id}', [
             'as' => 'products.update',
