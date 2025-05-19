@@ -35,7 +35,7 @@ class RolePolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Role $role): bool
+    public function update(User $user): bool
     {
         return $user->checkPermissionAccess('role_edit');
     }
