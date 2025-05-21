@@ -14,6 +14,7 @@ class PermissionGateAndPolicyAccess
         $this->defineGateSlider();
         $this->defineGateSetting();
         $this->defineGateRole();
+        $this->defineGateUser();
     }
 
     // category
@@ -69,5 +70,14 @@ class PermissionGateAndPolicyAccess
         Gate::define('role_add', 'App\Policies\RolePolicy@create');
         Gate::define('role_edit', 'App\Policies\RolePolicy@update');
         Gate::define('role_delete', 'App\Policies\RolePolicy@delete');
+    }
+
+    // user
+    public function defineGateUser()
+    {
+        Gate::define('user_list', 'App\Policies\UserPolicy@view');
+        Gate::define('user_add', 'App\Policies\UserPolicy@create');
+        Gate::define('user_edit', 'App\Policies\UserPolicy@update');
+        Gate::define('user_delete', 'App\Policies\UserPolicy@delete');
     }
 }

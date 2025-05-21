@@ -115,5 +115,12 @@
       <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
           class="fas fa-th-large"></i></a>
     </li>
+    <!-- Logout -->
+    <li class="nav-item">
+      <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button type="submit" class="btn btn-danger">Logout</button>
+      </form>
+    </li>
   </ul>
 </nav>

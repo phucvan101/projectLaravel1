@@ -97,10 +97,9 @@ class AdminProductController extends Controller
                     $tagInstance = $this->tag->firstOrCreate(['name' => $tagItem]); // tìm tag có tên $tagItem trong bảng tags -> tồn tại thì trả về -> chưa tồn tại thì tạo mới tag với tên $tagItem rồi trả về. 
                     $tagIds[] = $tagInstance->id;
                 }
+                $product->tags()->attach($tagIds); // Gắn tất cả các tag (theo danh sách id trong $tagIds) vào sản phẩm vừa tạo, Laravel sẽ tự động thêm các bản ghi vào bảng trung gian product_tags (giả sử bạn đặt tên bảng trung gian là như vậy).
             };
-            // Insert tags for product
 
-            $product->tags()->attach($tagIds); // Gắn tất cả các tag (theo danh sách id trong $tagIds) vào sản phẩm vừa tạo, Laravel sẽ tự động thêm các bản ghi vào bảng trung gian product_tags (giả sử bạn đặt tên bảng trung gian là như vậy).
             DB::commit(); // nếu không lỗi, lưu tất cả thay đổi. 
             return redirect()->route('products.index');
         } catch (\Exception $exception) {
@@ -153,10 +152,10 @@ class AdminProductController extends Controller
                     $tagInstance = $this->tag->firstOrCreate(['name' => $tagItem]); // tìm tag có tên $tagItem trong bảng tags -> tồn tại thì trả về -> chưa tồn tại thì tạo mới tag với tên $tagItem rồi trả về. 
                     $tagIds[] = $tagInstance->id;
                 }
+                $product->tags()->sync($tagIds);
             };
             // Insert tags for product
 
-            $product->tags()->sync($tagIds);
             DB::commit(); // nếu không lỗi, lưu tất cả thay đổi. 
             return redirect()->route('products.index');
         } catch (\Exception $exception) {

@@ -1,9 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/admin', 'App\Http\Controllers\AdminController@loginAdmin');
 Route::post('/admin', 'App\Http\Controllers\AdminController@postLoginAdmin');
+
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/admin');
+})->name('logout');
 
 Route::get('/home', function () {
     return view('home');

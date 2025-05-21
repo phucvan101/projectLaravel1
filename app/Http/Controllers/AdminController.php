@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use PharIo\Manifest\RequiresElement;
 use Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
     //
     public function loginAdmin()
     {
+        // $hashed = Hash::make('123456');
+        // dd($hashed);
         if (auth()->check()) {
             return redirect()->to('home');
         }
