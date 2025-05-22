@@ -4,7 +4,7 @@
 <!-- load file admin roi dua vao phan content -->
 
 @section('title')
-<title>Home</title>
+<title>Slider</title>
 @endsection
 
 @section('css')
@@ -20,7 +20,7 @@
 
 @section('content')
 <div class="content-wrapper">
-    @include('partials.content-header', ['name' => 'Slider', 'key' => 'List'])
+    @include('partials.content-header', ['name' => 'Slider', 'key' => 'Search'])
 
     <div class="content">
         <div class="container-fluid">

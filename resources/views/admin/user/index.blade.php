@@ -4,7 +4,7 @@
 <!-- load file admin roi dua vao phan content -->
 
 @section('title')
-<title>Home</title>
+<title>User</title>
 @endsection
 
 @section('css')
@@ -25,6 +25,13 @@
     <div class="content">
         <div class="container-fluid">
             <div class="row">
+                <!-- Search -->
+                @include('Components.search', [
+                'route' => 'users.search',
+                'placeholder' => 'Search users...'
+                ])
+                <!-- End Search -->
+
                 <div class="col-md-12">
                     <a href="{{route('users.create')}}" class="btn btn-success float-right m-2">Add</a>
                 </div>

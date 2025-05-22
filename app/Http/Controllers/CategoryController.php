@@ -79,4 +79,11 @@ class CategoryController extends Controller
     {
         return $this->deleteModelTrait($id, $this->category);
     }
+
+    public function search()
+    {
+        $query = request()->input('query');
+        $categories = Category::search('name', $query)->paginate(5);
+        return view('admin.category.search', compact(['query', 'categories']));
+    }
 }

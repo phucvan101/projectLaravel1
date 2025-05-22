@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
+
 
 Route::prefix('categories')->group(function () {
     Route::get('/', [
@@ -32,4 +34,6 @@ Route::prefix('categories')->group(function () {
         'uses' => 'App\Http\Controllers\CategoryController@delete',
         'middleware' => 'can:category_delete'
     ]);
+
+    Route::get('/search', [CategoryController::class, 'search'])->name('categories.search');
 });

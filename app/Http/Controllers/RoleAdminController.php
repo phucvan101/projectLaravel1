@@ -64,4 +64,11 @@ class RoleAdminController extends Controller
     {
         return $this->deleteModelTrait($id, $this->role);
     }
+
+    public function search()
+    {
+        $query = request()->input('query');
+        $roles = Role::search('name', $query)->paginate(5);
+        return view('admin.role.search', compact(['query', 'roles']));
+    }
 }

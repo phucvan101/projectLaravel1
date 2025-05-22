@@ -80,4 +80,12 @@ class SliderAdminController extends Controller
     {
         return $this->deleteModelTrait($id, $this->slider);
     }
+
+    public function search()
+    {
+
+        $query = request()->input('query');
+        $sliders = Slider::search('name', $query)->paginate(5);
+        return view('admin.slider.search', compact(['query', 'sliders']));
+    }
 }

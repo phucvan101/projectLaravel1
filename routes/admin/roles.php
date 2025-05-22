@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleAdminController;
 
 
 Route::prefix('roles')->group(function () {
@@ -45,4 +46,6 @@ Route::prefix('roles')->group(function () {
         // 'middleware' => 'can:role_delete'
 
     ]);
+
+    Route::get('/search', [RoleAdminController::class, 'search'])->name('roles.search');
 });

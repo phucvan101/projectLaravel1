@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AdminProductController;
 
 Route::prefix('products')->group(function () {
     Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
@@ -44,4 +44,7 @@ Route::prefix('products')->group(function () {
         'uses' => 'App\Http\Controllers\AdminProductController@delete',
         'middleware' => 'can:product_delete'
     ]);
+
+    // route: search
+    Route::get('/search', [AdminProductController::class, 'search'])->name('products.search');
 });

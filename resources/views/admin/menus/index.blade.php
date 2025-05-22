@@ -23,6 +23,12 @@
     <div class="content">
         <div class="container-fluid">
             <div class="row">
+                <!-- Search -->
+                @include('Components.search', [
+                'route' => 'menus.search',
+                'placeholder' => 'Search menus...'
+                ])
+                <!--End Search -->
                 <div class="col-md-12">
                     <a href="{{route('menus.create')}}" class="btn btn-success float-right m-2">Add</a>
                 </div>

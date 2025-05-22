@@ -130,8 +130,8 @@ class AdminProductController extends Controller
             ];
             $dataUploadFeatureImage = $this->storageTraitUpload('feature_image_path', 'product');
             if (!empty($dataUploadFeatureImage)) {
-                $dataProductCreate['feature_image_name'] = $dataUploadFeatureImage['file_name'];
-                $dataProductCreate['feature_image_path'] = $dataUploadFeatureImage['file_path'];
+                $dataProductUpdate['feature_image_name'] = $dataUploadFeatureImage['file_name'];
+                $dataProductUpdate['feature_image_path'] = $dataUploadFeatureImage['file_path'];
             }
             $this->product->find($id)->update($dataProductUpdate);
             $product = $this->product->find($id);
@@ -168,5 +168,14 @@ class AdminProductController extends Controller
     public function delete($id)
     {
         return $this->deleteModelTrait($id, $this->product);
+    }
+
+
+    public function search()
+    {
+
+        $query = request()->input('query');
+        $products = Product::search('name', $query)->paginate(5);
+        return view('admin.product.search', compact(['query', 'products']));
     }
 }

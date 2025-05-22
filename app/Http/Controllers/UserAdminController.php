@@ -88,4 +88,11 @@ class UserAdminController extends Controller
     {
         return $this->deleteModelTrait($id, $this->user);
     }
+
+    public function search()
+    {
+        $query = request()->input('query');
+        $users = User::search('name', $query)->paginate(5);
+        return view('admin.user.search', compact('users'));
+    }
 }

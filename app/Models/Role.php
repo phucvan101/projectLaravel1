@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\SearchableTrait;
 
 class Role extends Model
 {
     //
+    use SearchableTrait;
     protected $guarded = [];
     public function permissions()
     {

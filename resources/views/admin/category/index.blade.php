@@ -4,7 +4,7 @@
 <!-- load file admin roi dua vao phan content -->
 
 @section('title')
-<title>Home</title>
+<title>Category </title>
 @endsection
 
 
@@ -24,6 +24,12 @@
     <div class="content">
         <div class="container-fluid">
             <div class="row">
+                <!-- Search -->
+                @include('Components.search', [
+                'route' => 'categories.search',
+                'placeholder' => 'Search categories...'
+                ])
+                <!--End Search -->
                 <div class="col-md-12">
                     @can('category_add')
                     <a href="{{route('categories.create')}}" class="btn btn-success float-right m-2">Add</a>

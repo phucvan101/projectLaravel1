@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\SearchableTrait;
 
 class Product extends Model
 {
     //
     use SoftDeletes;
+    use SearchableTrait;
     protected $guarded = []; // tất cả trường đều có thể gián giá trị 
     public function images()
     {

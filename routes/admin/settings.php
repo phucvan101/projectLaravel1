@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminSettingController;
 
 
 Route::prefix('settings')->group(function () {
@@ -38,4 +39,6 @@ Route::prefix('settings')->group(function () {
         'uses' => 'App\Http\Controllers\AdminSettingController@delete',
         'middleware' => 'can:setting_delete'
     ]);
+
+    Route::get('/search', [AdminSettingController::class, 'search'])->name('settings.search');
 });

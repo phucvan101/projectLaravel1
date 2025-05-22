@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MenuController;
+
 
 Route::prefix('menus')->group(function () {
     Route::get('/', [
@@ -30,4 +32,5 @@ Route::prefix('menus')->group(function () {
         'as' => 'menus.delete',
         'uses' => 'App\Http\Controllers\MenuController@delete'
     ]);
+    Route::get('/search', [MenuController::class, 'search'])->name('menus.search');
 });

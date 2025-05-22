@@ -4,7 +4,7 @@
 <!-- load file admin roi dua vao phan content -->
 
 @section('title')
-<title>Home</title>
+<title>User</title>
 @endsection
 
 @section('css')
@@ -20,19 +20,20 @@
 
 @section('content')
 <div class="content-wrapper">
-    @include('partials.content-header', ['name' => 'Slider', 'key' => 'List'])
+    @include('partials.content-header', ['name' => 'User', 'key' => 'Search'])
 
     <div class="content">
         <div class="container-fluid">
             <div class="row">
                 <!-- Search -->
                 @include('Components.search', [
-                'route' => 'sliders.search',
-                'placeholder' => 'Search sliders...'
+                'route' => 'users.search',
+                'placeholder' => 'Search users...'
                 ])
-                <!--End Search -->
+                <!-- End Search -->
+
                 <div class="col-md-12">
-                    <a href="{{route('sliders.create')}}" class="btn btn-success float-right m-2">Add</a>
+                    <a href="{{route('users.create')}}" class="btn btn-success float-right m-2">Add</a>
                 </div>
                 <div class="col-12">
                     <table class="table">
@@ -40,24 +41,22 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>
-                                <th scope="col">Description</th>
+                                <th scope="col">Email</th>
                                 <th scope="col">Action</th>
 
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($sliders as $slider)
+                            @foreach($users as $user)
                             <tr>
-                                <th scope="row">{{$slider->id}}</th>
-                                <td>{{$slider->name}}</td>
-                                <td>{{$slider->description}}</td>
+                                <th scope="row">{{$user->id}}</th>
+                                <td>{{$user->name}}</td>
+                                <td>{{$user->email}}</td>
+
                                 <td>
-                                    <img class="image_slider_150_100" src=" {{$slider->image_path}}" alt="">
-                                </td>
-                                <td>
-                                    <a href="{{route('sliders.edit', ['id' => $slider->id])}}" class="btn btn-default">Edit</a>
+                                    <a href="{{route('users.edit', ['id' => $user->id])}}" class=" btn btn-default">Edit</a>
                                     <a href=""
-                                        data-url="{{route('sliders.delete', ['id' => $slider->id])}}"
+                                        data-url="{{route('users.delete', ['id' =>$user->id])}}"
                                         class="btn btn-danger action_delete">Delete
                                     </a>
                                 </td>

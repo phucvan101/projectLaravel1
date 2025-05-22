@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\SliderAdminController;
 
 Route::prefix('sliders')->group(function () {
     Route::get('/', [
@@ -41,4 +41,6 @@ Route::prefix('sliders')->group(function () {
         'uses' => 'App\Http\Controllers\SliderAdminController@delete',
         'middleware' => 'can:slider_delete'
     ]);
+    // route: search
+    Route::get('/search', [SliderAdminController::class, 'search'])->name('sliders.search');
 });

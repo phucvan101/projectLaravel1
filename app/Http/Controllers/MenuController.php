@@ -71,4 +71,11 @@ class MenuController extends Controller
             $this->menu
         );
     }
+
+    public function search()
+    {
+        $query = request()->input('query');
+        $menus = Menu::search('config_key', $query)->paginate(5);
+        return view('admin.menu.search', compact(['query', 'menus']));
+    }
 }

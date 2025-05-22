@@ -58,4 +58,11 @@ class AdminSettingController extends Controller
 
         return $this->deleteModelTrait($id, $this->setting);
     }
+
+    public function search()
+    {
+        $query = request()->input('query');
+        $settings = Setting::search('config_key', $query)->paginate(5);
+        return view('admin.setting.search', compact(['query', 'settings']));
+    }
 }

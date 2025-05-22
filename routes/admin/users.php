@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UserAdminController;
 
 Route::prefix('users')->group(function () {
     Route::get('/', [
@@ -38,4 +38,6 @@ Route::prefix('users')->group(function () {
         'uses' => 'App\Http\Controllers\UserAdminController@delete',
         'middleware' => 'can:user_list'
     ]);
+
+    Route::get('/search', [UserAdminController::class, 'search'])->name('users.search');
 });
