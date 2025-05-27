@@ -62,7 +62,7 @@ class AdminSettingController extends Controller
     public function search()
     {
         $query = request()->input('query');
-        $settings = Setting::search('config_key', $query)->paginate(5);
+        $settings = Setting::search('config_key', $query)->paginate(5)->appends(['query' => $query]);
         return view('admin.setting.search', compact(['query', 'settings']));
     }
 }
