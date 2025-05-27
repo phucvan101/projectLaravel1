@@ -108,6 +108,15 @@
           </a>
         </li>
 
+        <!-- Order -->
+        <li class="nav-item">
+          <a href="{{route('orders.index')}}" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Order List
+            </p>
+          </a>
+        </li>
 
       </ul>
     </nav>

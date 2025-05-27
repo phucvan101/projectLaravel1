@@ -49,4 +49,7 @@ Route::prefix('admin')->group(function () {
 
     // route: permission
     require __DIR__ . '/admin/permissions.php';
+
+    // route: orders
+    require __DIR__ . '/admin/orders.php';
 });

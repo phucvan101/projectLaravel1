@@ -175,7 +175,10 @@ class AdminProductController extends Controller
     {
 
         $query = request()->input('query');
-        $products = Product::search('name', $query)->paginate(5);
+        if (!$query) {
+            return redirect()->route('products.index')->with('error', 'Please enter a search keyword.');
+        }
+        $products = Product::search('name', $query)->paginate(2)->appends(['query' => $query]); // thêm append để giữ giá trị khi nhập để truyền vào trong input search để không bị mất giá trị khi phân trang.
         return view('admin.product.search', compact(['query', 'products']));
     }
 }
