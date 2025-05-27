@@ -75,7 +75,7 @@ class MenuController extends Controller
     public function search()
     {
         $query = request()->input('query');
-        $menus = Menu::search('config_key', $query)->paginate(5);
+        $menus = Menu::search('config_key', $query)->paginate(5)->appends(['query' => $query]);
         return view('admin.menu.search', compact(['query', 'menus']));
     }
 }

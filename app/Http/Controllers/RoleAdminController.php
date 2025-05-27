@@ -68,7 +68,7 @@ class RoleAdminController extends Controller
     public function search()
     {
         $query = request()->input('query');
-        $roles = Role::search('name', $query)->paginate(5);
+        $roles = Role::search('name', $query)->paginate(5)->appends(['query' => $query]);
         return view('admin.role.search', compact(['query', 'roles']));
     }
 }

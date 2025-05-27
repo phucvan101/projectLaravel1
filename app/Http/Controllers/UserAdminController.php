@@ -92,7 +92,7 @@ class UserAdminController extends Controller
     public function search()
     {
         $query = request()->input('query');
-        $users = User::search('name', $query)->paginate(5);
+        $users = User::search('name', $query)->paginate(5)->appends(['query' => $query]);
         return view('admin.user.search', compact('users'));
     }
 }

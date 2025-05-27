@@ -85,7 +85,7 @@ class SliderAdminController extends Controller
     {
 
         $query = request()->input('query');
-        $sliders = Slider::search('name', $query)->paginate(5);
+        $sliders = Slider::search('name', $query)->paginate(5)->appends(['query' => $query]);
         return view('admin.slider.search', compact(['query', 'sliders']));
     }
 }

@@ -83,7 +83,7 @@ class CategoryController extends Controller
     public function search()
     {
         $query = request()->input('query');
-        $categories = Category::search('name', $query)->paginate(5);
+        $categories = Category::search('name', $query)->paginate(5)->appends(['query' => $query]);
         return view('admin.category.search', compact(['query', 'categories']));
     }
 }
