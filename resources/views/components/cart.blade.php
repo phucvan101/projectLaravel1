@@ -1,5 +1,5 @@
 <div class="content-wrapper">
-    <form action="{{ route('orders.updateOrder', ['id' => $order->id]) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('orders.updateOrder', ['id' => $order->id])}}" method="POST">
         @csrf
         <div class="container py-5">
             <div class="card-header bg-primary text-white">
@@ -10,22 +10,42 @@
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label"><strong>Recipient Name:</strong></label>
-                            <input type="text" class="form-control" name="customer_name" value="{{ $order->customer_name }}">
+                            <input type="text" class="form-control @error('customer_name') is-invalid @enderror" name="customer_name" value="{{ $order->customer_name }}">
+                            @error('customer_name')
+                            <div class="btn btn-danger mt-2">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label"><strong>Phone Number:</strong></label>
-                            <input type="text" class="form-control" name="customer_phone" value="{{ $order->customer_phone }}">
+                            <input type="text" class="form-control @error('customer_phone') is-invalid @enderror" name="customer_phone" value="{{ $order->customer_phone }}">
+                            @error('customer_phone')
+                            <div class="btn btn-danger mt-2">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label"><strong>Email:</strong></label>
-                            <input type="email" class="form-control" name="customer_email" value="{{ $order->customer_email }}">
+                            <input type="email" class="form-control @error('customer_email') is-invalid @enderror" name="customer_email" value="{{ $order->customer_email }}">
+                            @error('customer_email')
+                            <div class="btn btn-danger mt-2">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label"><strong>Delivery Address:</strong></label>
-                            <input type="text" class="form-control" name="customer_address" value="{{ $order->customer_address }}">
+                            <input type="text" class="form-control @error('customer_address') is-invalid @enderror" name="customer_address" value="{{ $order->customer_address }}">
+                            @error('customer_address')
+                            <div class="btn btn-danger mt-2">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
 
                     </div>

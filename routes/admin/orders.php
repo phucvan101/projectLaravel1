@@ -12,9 +12,11 @@ Route::prefix('orders')->group(function () {
     Route::get('/detail/{id}', [OrderAdminController::class, 'detail'])->name('orders.detail');
     // route edit
     Route::get('/edit/{id}', [OrderAdminController::class, 'edit'])->name('orders.edit');
-    // route update
+    // route update cart 
     Route::post('/edit/{idOrder}/update-cart', [OrderAdminController::class, 'updateCart'])->name('orders.updateCart');
+    // route delete product in cart
     Route::get('/edit/{idOrder}/delete-cart/{idOrderDetail}', [OrderAdminController::class, 'deleteCart'])->name('orders.deleteCart');
+    // route update order
     Route::post('/update/{id}', [OrderAdminController::class, 'updateOrder'])->name('orders.updateOrder');
 
     // route delete
