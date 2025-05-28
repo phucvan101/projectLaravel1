@@ -8,14 +8,17 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use Illuminate\Support\Facades\Log;
 use App\Traits\DeleteModelTrait;
+use \Exception;
 
 class OrderAdminController extends Controller
 {
     use DeleteModelTrait;
     protected $orderDetail;
-    public function __construct(OrderDetail $orderDetail)
+    protected $order;
+    public function __construct(OrderDetail $orderDetail, Order $order)
     {
         $this->orderDetail = $orderDetail;
+        $this->order = $order;
     }
 
     //view orders
@@ -196,5 +199,23 @@ class OrderAdminController extends Controller
     }
 
     // delete order 
-    public function delete($id) {}
+    public function delete($id)
+    {
+        try {
+            // xoa order
+            $this->order->find($id)->delete();
+            // Xóa tất cả order details liên quan
+            $this->orderDetail->where('order_id', $id)->delete();
+            return response()->json([
+                'code' => 200,
+                'message' => 'success',
+            ], 200);
+        } catch (Exception $exception) {
+            Log::error('Message: ' . $exception->getMessage() . '...Line :' . $exception->getLine());
+            return response()->json([
+                'code' => 500,
+                'message' => 'False'
+            ], 500);
+        };
+    }
 }
