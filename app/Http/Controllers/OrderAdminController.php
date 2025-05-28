@@ -4,10 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\OrderDetail;
 use Illuminate\Support\Facades\Log;
+use App\Traits\DeleteModelTrait;
 
 class OrderAdminController extends Controller
 {
+    use DeleteModelTrait;
+    protected $orderDetail;
+    public function __construct(OrderDetail $orderDetail)
+    {
+        $this->orderDetail = $orderDetail;
+    }
+
     //view orders
     public function index()
     {
@@ -122,6 +131,60 @@ class OrderAdminController extends Controller
                 'code' => 500
             ], 500);
         }
+    }
+
+    // delete cart item
+    // public function deleteCart($idOrderDetail)
+    // {
+    //     return $this->deleteModelTrait($idOrderDetail, $this->orderDetail);
+    // }
+    public function deleteCart($idOrder, $idOrderDetail)
+    {
+        try {
+            // Tìm order detail item
+            $orderDetail = OrderDetail::find($idOrderDetail);
+
+            if (!$orderDetail) {
+                return response()->json([
+                    'code' => 404,
+                    'message' => 'Order detail not found'
+                ], 404);
+            }
+
+            // Xóa item
+            $orderDetail->delete();
+
+            // Cập nhật lại total amount của order
+            $order = Order::find($idOrder);
+            if ($order) {
+                $newTotal = 0;
+                foreach ($order->orderDetails as $item) {
+                    $newTotal += $item->product_price * $item->quantity;
+                }
+                $order->total_amount = $newTotal;
+                $order->save();
+            }
+            // Trả về thông tin ra html 
+            $cartComponent = view('components.cart', compact('order'))->render();
+
+            return response()->json([
+                'code' => 200,
+                'message' => 'Item deleted successfully',
+                'cartComponent' => $cartComponent, // Trả về component cart đã cập nhật
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Delete cart error: ' . $e->getMessage());
+            return response()->json([
+                'code' => 500,
+                'message' => 'Server error: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    // update order
+    public function updateOrder($id)
+    {
+        dd('view');
     }
 
     // delete order 

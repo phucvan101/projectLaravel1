@@ -13,7 +13,6 @@
 
 @section('js')
 <script src="{{asset('vendor/sweetAlert2/sweetalert2@11.js')}}"></script>
-<script src="{{asset('admins/main.js')}}"></script>
 
 <script>
     function cartUpdate(event) {
@@ -40,8 +39,40 @@
             }
         })
     }
+
+    function cartDelete(event) {
+        event.preventDefault();
+        let url = $(this).data('url');
+
+        if (confirm('Are you sure you want to remove this item?')) {
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function(data) {
+                    if (data.code === 200) {
+                        $('.cart-wrapper').html(data.cartComponent);
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: 'Item removed successfully',
+                            timer: 1500
+                        });
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseText);
+                    alert('Error deleting item');
+                }
+            });
+        }
+
+    }
     $(function() {
         $(document).on('click', '.cart_update', cartUpdate);
+        $(document).on('click', '.delete_item_cart', cartDelete);
     })
 </script>
 @endsection
