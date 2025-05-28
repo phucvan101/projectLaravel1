@@ -14,6 +14,7 @@
 @section('js')
 <script src="{{asset('vendor/sweetAlert2/sweetalert2@11.js')}}"></script>
 <script src="{{asset('admins/main.js')}}"></script>
+
 @endsection
 
 @section('content')
@@ -24,7 +25,10 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- Search -->
-
+                @include('Components.search', [
+                'route' => 'orders.search',
+                'placeholder' => 'Search orders...'
+                ])
                 <!--End Search -->
 
                 <div class="col-12">
@@ -51,8 +55,9 @@
                                 <td>{{$order->customer_address}}</td>
                                 <td>{{$order->total_amount}}</td>
                                 <td>
-                                    <a href="" class="btn btn-default">Edit</a>
-                                    <a href="" data-url="" class="btn btn-danger action_delete">Delete</a>
+                                    <a href="{{ route('orders.detail', $order->id) }}" class="btn btn-primary">Detail</a>
+                                    <a href="{{route('orders.edit', ['id' => $order->id])}}" class="btn btn-default">Edit</a>
+                                    <a href="" data-url="{{route('orders.delete', ['id' => $order->id])}}" class="btn btn-danger action_delete">Delete</a>
                                 </td>
                             </tr>
                             @endforeach
