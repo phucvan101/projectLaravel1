@@ -16,6 +16,7 @@ return [
         'user',
         'role',
         'menu',
+        'order',
         'test'
     ],
     'module_children' => [

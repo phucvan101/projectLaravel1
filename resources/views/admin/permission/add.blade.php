@@ -15,6 +15,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+
                     <form action="{{route('permissions.store')}}" method="POST">
                         @csrf
                         <div class="form-group">
