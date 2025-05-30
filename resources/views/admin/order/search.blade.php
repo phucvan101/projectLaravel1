@@ -56,6 +56,7 @@
                                 <th scope="col">Customer Phone</th>
                                 <th scope="col">Customer Address</th>
                                 <th scope="col">Total Amount</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">Actions</th>
 
                             </tr>
@@ -68,6 +69,8 @@
                                 <td>{{$order->customer_phone}}</td>
                                 <td>{{$order->customer_address}}</td>
                                 <td>{{$order->total_amount}}</td>
+                                <td>
+                                    @include('admin.components.status', ['status' => $order->status])
                                 <td>
                                     <a href="{{ route('orders.detail', $order->id) }}" class="btn btn-primary">Detail</a>
                                     <a href="" class="btn btn-default">Edit</a>

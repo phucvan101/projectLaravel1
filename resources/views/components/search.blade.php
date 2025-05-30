@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light bg-light">
+<nav class="col-md-3 mb-3">
     <form class="form-inline" action="{{ route($route ?? 'search') }}" method="GET">
         <input class="form-control mr-sm-2 @error('query') is-invalid @enderror"
             name="query"

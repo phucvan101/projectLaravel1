@@ -46,6 +46,21 @@
                 ])
                 <!--End Search -->
 
+                <!-- Filter -->
+                <div class="col-md-3 mb-3">
+                    <select id="status-filter" class="form-control" data-url="{{route('orders.filterByStatus')}}">
+                        <option value="">-- Filter by Status --</option>
+                        <option value="pending">Pending</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="shipping">Shipping</option>
+                        <option value="delivered">Delivered</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <!--End Filter -->
+
+
+                <!-- Table -->
                 <div class="col-12">
                     <table class="table">
                         <thead>
@@ -79,6 +94,7 @@
                         </tbody>
                     </table>
                 </div>
+                <!--End Table -->
                 <div class="col-md-12">
                     {{$orders->links(("pagination::bootstrap-4"))}}
                 </div>

@@ -34,6 +34,98 @@ class OrderAdminController extends Controller
         $orders = Order::search('order_code', $query)->paginate(5)->appends(['query' => $query]);
         return view('admin.order.search', compact(['query', 'orders']));
     }
+
+
+    // filter orders by status
+    public function filterByStatus(Request $request)
+    {
+        try {
+            // Log::info('FilterByStatus method called');
+
+            $status = $request->input('status');
+            $page = $request->input('page', 1); // Lấy page number, default là 1
+
+            // Log::info('FilterByStatus called with status: ' . $status . ', page: ' . $page); 
+
+            // Nếu status rỗng, lấy tất cả orders
+            if (empty($status)) {
+                $orders = Order::latest()->paginate(7, ['*'], 'page', $page); // 'page': tên tham số phân trang trong URL (ví dụ ?page=2), $page: giá trị trang hiện tại (thường là một biến được lấy từ request).
+                // Log::info('No status provided, fetching all orders');
+            } else {
+                $orders = Order::where('status', $status)->latest()->paginate(7, ['*'], 'page', $page);
+                // Log::info('Fetching orders with status: ' . $status);
+            }
+
+            // Log::info('Found ' . $orders->count() . ' orders');
+
+            // Tạo HTML cho tbody
+            $tableRows = '';
+            foreach ($orders as $order) {
+                $statusBadge = $this->getStatusBadge($order->status);
+
+                $tableRows .= '<tr>';
+                $tableRows .= '<th scope="row">' . $order->order_code . '</th>';
+                $tableRows .= '<td>' . $order->customer_name . '</td>';
+                $tableRows .= '<td>' . $order->customer_phone . '</td>';
+                $tableRows .= '<td>' . $order->customer_address . '</td>';
+                $tableRows .= '<td>' . $order->total_amount . '</td>';
+                $tableRows .= '<td>' . $statusBadge . '</td>';
+                $tableRows .= '<td>';
+                $tableRows .= '<a href="' . route('orders.detail', $order->id) . '" class="btn btn-primary">Detail</a> ';
+                $tableRows .= '<a href="' . route('orders.edit', ['id' => $order->id]) . '" class="btn btn-default">Edit</a> ';
+                $tableRows .= '<a href="" data-url="' . route('orders.delete', ['id' => $order->id]) . '" class="btn btn-danger action_delete">Delete</a>';
+                $tableRows .= '</td>';
+                $tableRows .= '</tr>';
+            }
+
+            // Nếu không có orders
+            if ($orders->count() == 0) {
+                $tableRows = '<tr><td colspan="7" class="text-center">No orders found</td></tr>';
+            }
+
+            // Tạo pagination HTML với parameters
+            $paginationHtml = $orders->appends(['status' => $status])->links('pagination::bootstrap-4')->toHtml(); //giữ lại các giá trị lọc (filter) khi người dùng chuyển trang.
+
+            // Log::info('Response prepared successfully');
+
+            return response()->json([
+                'tableRows' => $tableRows,
+                'pagination' => $paginationHtml,
+                'total' => $orders->total(),
+                'currentPage' => $orders->currentPage(),
+                'lastPage' => $orders->lastPage(),
+                'code' => 200,
+                'message' => 'Success'
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('FilterByStatus Exception: ' . $e->getMessage());
+
+            return response()->json([
+                'code' => 500,
+                'message' => 'Error: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    // Helper method để tạo status badge
+    private function getStatusBadge($status)
+    {
+        switch ($status) {
+            case 'pending':
+                return '<span class="badge badge-warning">Pending</span>';
+            case 'confirmed':
+                return '<span class="badge badge-primary">Confirmed</span>';
+            case 'shipping':
+                return '<span class="badge badge-info">Shipping</span>';
+            case 'delivered':
+                return '<span class="badge badge-success">Delivered</span>';
+            case 'cancelled':
+                return '<span class="badge badge-danger">Cancelled</span>';
+            default:
+                return '<span class="badge badge-secondary">' . ucfirst($status) . '</span>';
+        }
+    }
+
     //view order detail
     public function detail($id)
     {
