@@ -9,6 +9,8 @@
 
 @section('css')
 <link rel="stylesheet" href="{{asset('admins/setting/index/index.css')}}">
+<!-- Thêm vào <head> -->
+
 @endsection
 
 @section('js')
@@ -31,6 +33,9 @@
                         <p><strong>Phone Number:</strong> {{ $order->customer_phone }}</p>
                         <p><strong>Email:</strong> {{ $order->customer_email }}</p>
                         <p><strong>Delivery Address:</strong> {{ $order->customer_address }}</p>
+                        <p><strong>Status:</strong>
+                            @include('admin.components.status', ['status' => $order->status])
+                        </p>
                     </div>
                 </div>
 
@@ -61,6 +66,7 @@
                         </tbody>
                     </table>
                 </div>
+
 
                 <div class="d-flex justify-content-end mt-4">
                     <h4><strong>Total Amount:</strong> ${{ number_format($order->total_amount, 2) }}</h4>

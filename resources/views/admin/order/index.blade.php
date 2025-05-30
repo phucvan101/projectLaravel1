@@ -52,11 +52,11 @@
                             <tr>
                                 <th scope="col">Order Code</th>
                                 <th scope="col">Customer Name</th>
-                                <th scope="col">Customer email</th>
                                 <th scope="col">Customer Phone</th>
                                 <th scope="col">Customer Address</th>
                                 <th scope="col">Total Amount</th>
                                 <th scope="col">Actions</th>
+                                <th scope="col">Status</th>
 
                             </tr>
                         </thead>
@@ -65,10 +65,10 @@
                             <tr>
                                 <th scope="row">{{$order->order_code}}</th>
                                 <td>{{$order->customer_name}}</td>
-                                <td>{{$order->customer_email}}</td>
                                 <td>{{$order->customer_phone}}</td>
                                 <td>{{$order->customer_address}}</td>
                                 <td>{{$order->total_amount}}</td>
+                                @include('admin.components.status', ['order' => $order])
                                 <td>
                                     <a href="{{ route('orders.detail', $order->id) }}" class="btn btn-primary">Detail</a>
                                     <a href="{{route('orders.edit', ['id' => $order->id])}}" class="btn btn-default">Edit</a>

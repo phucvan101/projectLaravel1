@@ -48,6 +48,19 @@
                             @enderror
                         </div>
 
+                        <div class="mb-3">
+                            <label>Select Status</label>
+
+                            <select class="form-control select2_init" name="status">
+                                <option value="">Select Status</option>
+                                <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                                <option value="confirmed" {{ $order->status == 'confirmed' ? 'selected' : '' }}>Confirmed</option>
+                                <option value="shipping" {{ $order->status == 'shipping' ? 'selected' : '' }}>Shipping</option>
+                                <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : '' }}>Delivered</option>
+                                <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                            </select>
+                        </div>
+
                     </div>
                 </div>
 

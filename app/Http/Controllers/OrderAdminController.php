@@ -190,6 +190,7 @@ class OrderAdminController extends Controller
                 'customer_phone' => $request->customer_phone,
                 'customer_address' => $request->customer_address,
                 'customer_email' => $request->customer_email,
+                'status' => $request->status,
             ]);
             return redirect()->route('orders.index')->with('success', 'Order updated successfully');
         } catch (\Exception $e) {
