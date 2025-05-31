@@ -96,7 +96,9 @@
                 </div>
                 <!--End Table -->
                 <div class="col-md-12">
-                    {{$orders->links(("pagination::bootstrap-4"))}}
+                    <div id="pagination-wrapper">
+                        {{ $orders->appends(request()->all())->links('pagination::bootstrap-4') }}
+                    </div>
                 </div>
             </div>
         </div>

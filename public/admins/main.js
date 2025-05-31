@@ -40,7 +40,7 @@ function filterByStatus() {
     let status = $(this).val();
     let urlRequest = $(this).data('url');
 
-    loadOrders(urlRequest, { status: status });
+    loadOrders(urlRequest, { status: status, page: 1 });// Reset về trang 1 khi filter mới
 }
 
 function loadOrders(url, params = {}) {
@@ -59,7 +59,10 @@ function loadOrders(url, params = {}) {
                 $('tbody').html(data.tableRows);
 
                 // Update pagination
-                $('.pagination').parent().html(data.pagination);
+                $('#pagination-wrapper').html(data.pagination);
+
+                // ✅ Gắn lại sự kiện click cho phân trang sau khi cập nhật
+                $(document).on('click', '#pagination-wrapper .pagination a', handlePaginationClick);
 
                 // Show result count (optional)
                 console.log('Total orders found:', data.total);
@@ -90,7 +93,7 @@ function handlePaginationClick(event) {
     // Load orders with current status and page
     loadOrders(filterUrl, {
         status: currentStatus,
-        page: page
+        page: page,
     });
 }
 
