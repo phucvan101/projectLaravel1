@@ -40,7 +40,7 @@ function filterByStatus() {
     let status = $(this).val();
     let urlRequest = $(this).data('url');
 
-    loadOrders(urlRequest, { status: status, page: 1 });// Reset về trang 1 khi filter mới
+    loadOrders(urlRequest, { status: status, page: 1 });// Reset về trang 1 khi filter mới  
 }
 
 function loadOrders(url, params = {}) {
@@ -61,7 +61,7 @@ function loadOrders(url, params = {}) {
                 // Update pagination
                 $('#pagination-wrapper').html(data.pagination);
 
-                // ✅ Gắn lại sự kiện click cho phân trang sau khi cập nhật
+                // Gắn lại sự kiện click cho phân trang sau khi cập nhật
                 $(document).on('click', '#pagination-wrapper .pagination a', handlePaginationClick);
 
                 // Show result count (optional)

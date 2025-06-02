@@ -36,6 +36,55 @@
           </a>
         </li>
 
+        <!-- Product -->
+        <li class="nav-item">
+          <a href="{{route('products.index')}}" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Products
+            </p>
+          </a>
+        </li>
+
+        <!-- Employee -->
+        <li class="nav-item">
+          <a href="{{route('users.index')}}" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Employee List
+            </p>
+          </a>
+        </li>
+
+                <!-- Order -->
+        <li class="nav-item">
+          <a href="{{route('orders.index')}}" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Order List
+            </p>
+          </a>
+        </li>
+
+        <!-- Roles -->
+        <li class="nav-item">
+          <a href="{{route('roles.index')}}" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Roles
+            </p>
+          </a>
+        </li>
+
+        <!-- Permission
+        <li class="nav-item">
+          <a href="{{route('permissions.create')}}" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Permission
+            </p>
+          </a>
+        </li> -->
 
 
         <!-- Menu -->
@@ -44,16 +93,6 @@
             <i class="nav-icon fas fa-th"></i>
             <p>
               Menus
-            </p>
-          </a>
-        </li>
-
-        <!-- Product -->
-        <li class="nav-item">
-          <a href="{{route('products.index')}}" class="nav-link">
-            <i class="nav-icon fas fa-th"></i>
-            <p>
-              Products
             </p>
           </a>
         </li>
@@ -78,45 +117,6 @@
           </a>
         </li>
 
-        <!-- Employee -->
-        <li class="nav-item">
-          <a href="{{route('users.index')}}" class="nav-link">
-            <i class="nav-icon fas fa-th"></i>
-            <p>
-              Employee List
-            </p>
-          </a>
-        </li>
-
-        <!-- Roles -->
-        <li class="nav-item">
-          <a href="{{route('roles.index')}}" class="nav-link">
-            <i class="nav-icon fas fa-th"></i>
-            <p>
-              Roles
-            </p>
-          </a>
-        </li>
-
-        <!-- Permission -->
-        <li class="nav-item">
-          <a href="{{route('permissions.create')}}" class="nav-link">
-            <i class="nav-icon fas fa-th"></i>
-            <p>
-              Permission
-            </p>
-          </a>
-        </li>
-
-        <!-- Order -->
-        <li class="nav-item">
-          <a href="{{route('orders.index')}}" class="nav-link">
-            <i class="nav-icon fas fa-th"></i>
-            <p>
-              Order List
-            </p>
-          </a>
-        </li>
 
       </ul>
     </nav>
