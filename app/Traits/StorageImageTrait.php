@@ -15,8 +15,8 @@ trait StorageImageTrait
 
             $file = request()->$fieldName;
             $fileNameOrigin = $file->getClientOriginalName(); // tên ảnh gốc
-            $fileNameHash = Str::random(20) . '.' . $file->getClientOriginalExtension();
-            $filePath = request()->file($fieldName)->storeAs('public/' . $folderName . '/' . auth()->id(), $fileNameHash); // up ảnh dựa vào đường dẫn củ filesystems.php 
+            $fileNameHash = Str::random(20) . '.' . $file->getClientOriginalExtension(); // Mục đích là để tránh trùng tên và bảo mật.
+            $filePath = request()->file($fieldName)->storeAs('public/' . $folderName . '/' . auth()->id(), $fileNameHash); // up ảnh dựa vào đường dẫn củ filesystems.php, Lưu file vào đúng thư mục theo user ID.
             $dataUploadTrait = [
                 'file_name' => $fileNameOrigin,
                 'file_path' => Storage::url($filePath),

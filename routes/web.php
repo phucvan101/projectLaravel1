@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\HomeController;
 
-Route::get('/admin', 'App\Http\Controllers\AdminController@loginAdmin');
+Route::get('/admin', 'App\Http\Controllers\AdminController@loginAdmin')->name('login');
 Route::post('/admin', 'App\Http\Controllers\AdminController@postLoginAdmin');
 
 Route::post('/logout', function () {
@@ -11,13 +12,11 @@ Route::post('/logout', function () {
     return redirect('/admin');
 })->name('logout');
 
-Route::get('/home', function () {
-    return view('home');
-});
+Route::get('/home', [HomeController::class, 'home'])->middleware('auth')->name('home');
 
 
 // Route: admin
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('check.login')->group(function () {
     // Route: Categories
     require __DIR__ . '/admin/categories.php';
 

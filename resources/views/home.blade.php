@@ -18,7 +18,13 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          Dashboard
+          Information:
+        </div>
+        <div class="col-md-12">
+          <ul>
+            <li>{{ $info->name }}</li>
+            <li>{{ $info->email }}</li>
+          </ul>
         </div>
 
       </div>
