@@ -16,7 +16,7 @@ Route::get('/home', [HomeController::class, 'home'])->middleware('auth')->name('
 
 
 // Route: admin
-Route::prefix('admin')->middleware('check.login')->group(function () {
+Route::prefix('admin')->middleware('auth')->group(function () {
     // Route: Categories
     require __DIR__ . '/admin/categories.php';
 
