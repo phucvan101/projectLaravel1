@@ -25,6 +25,22 @@ return Application::configure(basePath: dirname(__DIR__))
                 ], 404);
             }
         });
+        // 403 Forbidden
+        $exceptions->render(function (\Symfony\Component\HttpKernel\Exception\HttpException $e, Request $request) {
+            if ($e->getStatusCode() === 403 && $request->is('api/*')) {
+                return response()->json([
+                    'message' => 'Forbidden.'
+                ], 403);
+            }
+        });
+        // 500 Internal Server Error
+        $exceptions->render(function (\Symfony\Component\HttpKernel\Exception\HttpException $e, Request $request) {
+            if ($request->is('api/*')) {
+                return response()->json([
+                    'message' => 'Internal server error.'
+                ], 500);
+            }
+        });
         // Validation Exception
         $exceptions->render(function (\Illuminate\Validation\ValidationException $e, Request $request) {
             if ($request->is('api/*')) {
