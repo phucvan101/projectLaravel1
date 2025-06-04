@@ -22,12 +22,12 @@ class OrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
-            'customer_name' => 'required',
-            'customer_phone' => 'required',
-            'customer_address' => 'required',
-            'customer_email' => 'required|email',
-
+            // dùng somtimes cho các trường để khi update trường nào có sẵn không muốn update thì không bị lỗi validate
+            'customer_name' => 'sometimes|required',
+            'customer_phone' => 'sometimes|required',
+            'customer_address' => 'sometimes|required',
+            'customer_email' => 'sometimes|required|email',
+            'status' => 'sometimes|required|in:pending,confirmed,shipping,delivered,cancelled',
         ];
     }
 }

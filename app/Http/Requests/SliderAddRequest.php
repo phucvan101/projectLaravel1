@@ -23,9 +23,9 @@ class SliderAddRequest extends FormRequest
     {
         return [
             //
-            'name' => 'required|unique:sliders|max:255',
-            'description' => 'required',
-            'image_path' => 'required',
+            'name' => 'sometimes|required|unique:sliders|max:255',
+            'description' => 'sometimes|required',
+            'image_path' => 'sometimes|required',
         ];
     }
 }

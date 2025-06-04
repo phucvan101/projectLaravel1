@@ -31,7 +31,7 @@ class OrderAdminController extends Controller
     public function search()
     {
         $query = request()->input('query');
-        $orders = Order::search('order_code', $query)->paginate(5)->appends(['query' => $query]);
+        $orders = Order::search('order_code', $query)->paginate(5)->appends(['query' => $query]); // append sẽ giữa lại tham số khi sang page khá
         return view('admin.order.search', compact(['query', 'orders']));
     }
 

@@ -34,10 +34,11 @@ return Application::configure(basePath: dirname(__DIR__))
             }
         });
         // 500 Internal Server Error
-        $exceptions->render(function (\Symfony\Component\HttpKernel\Exception\HttpException $e, Request $request) {
+        $exceptions->render(function (\Throwable $e, Request $request) {
             if ($request->is('api/*')) {
                 return response()->json([
-                    'message' => 'Internal server error.'
+                    'message' => 'Internal server error.',
+                    'error' => config('app.debug') ? $e->getMessage() : 'Something went wrong.'
                 ], 500);
             }
         });

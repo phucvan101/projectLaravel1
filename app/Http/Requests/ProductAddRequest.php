@@ -23,10 +23,10 @@ class ProductAddRequest extends FormRequest
     {
         return [
             // key: rule
-            'name' => 'bail|required|unique:products|max:255|min:10',
-            'price' => 'required',
-            'category_id' => 'required',
-            'content' => 'required',
+            'name' => 'bail|sometimes|required|unique:products|max:255|min:10',
+            'price' => 'sometimes|required',
+            'category_id' => 'sometimes|required',
+            'content' => 'sometimes|required',
         ];
     }
 }

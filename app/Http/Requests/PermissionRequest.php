@@ -22,8 +22,8 @@ class PermissionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'bail|required|unique:permissions',
-            'module_children' => 'bail|required|array',
+            'name' => 'bail|sometimes|required|unique:permissions',
+            'module_children' => 'bail|sometimes|required|array',
         ];
     }
 }
