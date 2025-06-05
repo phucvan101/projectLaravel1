@@ -44,54 +44,48 @@ class SliderController extends Controller
             $dataInsert['image_name'] = $dataImageSlider['file_name'];
             $dataInsert['image_path'] = $dataImageSlider['file_path'];
         }
-        Log::info('hasFile', [$request->hasFile('image_path')]);
-        Log::info('request all', [$request->all()]);
+        // Log::info('hasFile', [$request->hasFile('image_path')]);
+        // Log::info('request all', [$request->all()]);
         $slider = Slider::create($dataInsert);
         return $this->success($slider, 'Slider created successfully', 201);
     }
 
 
-    // public function update(SliderUpdateRequest $request, $id)
-    // {
-    //     $slider = Slider::find($id);
-    //     if (!$slider) {
-    //         return $this->error(null, 'Slider not found', 404);
-    //     }
-
-    //     $dataUpdate = [];
-
-    //     // kiểm tra và cập nhật các trường dữ liệu -> khi update các trường không điền sẽ không bị null 
-    //     if ($request->has('name')) {
-    //         $dataUpdate['name'] = $request->name;
-    //     }
-    //     if ($request->has('description')) {
-    //         $dataUpdate['description'] = $request->description;
-    //     }
-
-    //     $dataImageSlider = $this->storageTraitUpload('image_path', 'slider');
-    //     // nếu có ảnh mới thì cập nhật ảnh mới, nếu không có thì giữ nguyên ảnh cũ
-    //     Log::info('dataImageSlider', [$dataImageSlider]);
-    //     if (!empty($dataImageSlider)) {
-    //         $dataUpdate['image_name'] = $dataImageSlider['file_name'];
-    //         $dataUpdate['image_path'] = $dataImageSlider['file_path'];
-    //     }
-    //     Log::info('request all', [$request->all()]);
-    //     Log::info('hasFile', [$request->hasFile('image_path')]);
-    //     if (empty($dataUpdate)) {
-    //         return $this->error(null, 'No data to update', 422);
-    //     }
-
-    //     $slider->update($dataUpdate);
-    //     return $this->success($slider, 'Slider updated successfully', 200);
-    // }
-
-    public function update($id, SliderUpdateRequest $request)
+    public function update(SliderUpdateRequest $request, $id)
     {
-        $slider = Slider::findOrFail($id);
-        $slider->update($request->all());
+        $slider = Slider::find($id);
+        if (!$slider) {
+            return $this->error(null, 'Slider not found', 404);
+        }
 
+        $dataUpdate = [];
+
+        // kiểm tra và cập nhật các trường dữ liệu -> khi update các trường không điền sẽ không bị null 
+        if ($request->has('name')) {
+            $dataUpdate['name'] = $request->name;
+        }
+        if ($request->has('description')) {
+            $dataUpdate['description'] = $request->description;
+        }
+
+        $dataImageSlider = $this->storageTraitUpload('image_path', 'slider');
+        // nếu có ảnh mới thì cập nhật ảnh mới, nếu không có thì giữ nguyên ảnh cũ
+        Log::info('dataImageSlider', [$dataImageSlider]);
+        if (!empty($dataImageSlider)) {
+            $dataUpdate['image_name'] = $dataImageSlider['file_name'];
+            $dataUpdate['image_path'] = $dataImageSlider['file_path'];
+        }
+        // Log::info('request all', [$request->all()]);
+        // Log::info('hasFile', [$request->hasFile('image_path')]);
+        if (empty($dataUpdate)) {
+            return $this->error(null, 'No data to update', 422);
+        }
+
+        $slider->update($dataUpdate);
         return $this->success($slider, 'Slider updated successfully', 200);
     }
+
+
 
     public function destroy($id)
     {

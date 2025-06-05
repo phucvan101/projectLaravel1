@@ -16,7 +16,7 @@ Route::middleware('auth:sanctum')->group(function () {
         ->middleware('can:slider_add');
 
     // Sửa slider
-    Route::put('sliders/{slider}', [SliderController::class, 'update'])
+    Route::post('sliders/{slider}', [SliderController::class, 'update'])
         ->middleware('can:slider_edit');
 
     // Xóa slider
