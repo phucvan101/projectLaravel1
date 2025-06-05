@@ -21,7 +21,7 @@ class SliderPolicy
      */
     public function view(User $user): bool
     {
-        return $user->checkPermissionAccess('menu_list');
+        return $user->checkPermissionAccess('slider_list');
     }
 
     /**
@@ -29,7 +29,7 @@ class SliderPolicy
      */
     public function create(User $user): bool
     {
-        return $user->checkPermissionAccess('menu_add');
+        return $user->checkPermissionAccess('slider_add');
     }
 
     /**
@@ -37,7 +37,7 @@ class SliderPolicy
      */
     public function update(User $user): bool
     {
-        return $user->checkPermissionAccess('menu_edit');
+        return $user->checkPermissionAccess('slider_edit');
     }
 
     /**
@@ -45,7 +45,7 @@ class SliderPolicy
      */
     public function delete(User $user): bool
     {
-        return $user->checkPermissionAccess('menu_delete');
+        return $user->checkPermissionAccess('slider_delete');
     }
 
     /**

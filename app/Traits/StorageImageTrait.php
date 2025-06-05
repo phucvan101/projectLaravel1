@@ -13,7 +13,7 @@ trait StorageImageTrait
         // kiểm tra xem có file hay không 
         if (request()->hasFile($fieldName)) {
 
-            $file = request()->$fieldName;
+            $file = request()->file($fieldName);
             $fileNameOrigin = $file->getClientOriginalName(); // tên ảnh gốc
             $fileNameHash = Str::random(20) . '.' . $file->getClientOriginalExtension(); // Mục đích là để tránh trùng tên và bảo mật.
             $filePath = request()->file($fieldName)->storeAs('public/' . $folderName . '/' . auth()->id(), $fileNameHash); // up ảnh dựa vào đường dẫn củ filesystems.php, Lưu file vào đúng thư mục theo user ID.

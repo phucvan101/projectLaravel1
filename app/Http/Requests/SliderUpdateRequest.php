@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SliderAddRequest extends FormRequest
+class SliderUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,9 @@ class SliderAddRequest extends FormRequest
     {
         return [
             //
-            'name' => 'sometimes|required|unique:sliders|max:255',
+            'name' => 'sometimes|required|unique:sliders,name|max:255',
             'description' => 'sometimes|required',
-            'image_path' => 'required',
+            'image_path' => 'nullable',
         ];
     }
 }
