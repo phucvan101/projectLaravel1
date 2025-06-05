@@ -13,13 +13,14 @@ class OrderController extends Controller
     //
     public function index()
     {
+
         $order = Order::all();
         return OrderResource::collection($order);
     }
 
     public function show($id)
     {
-        $order = Order::findOrFail($id);
+        $order = Order::find($id);
         return new OrderResource($order);
     }
 
@@ -43,11 +44,7 @@ class OrderController extends Controller
     public function destroy($id)
     {
         $order = Order::findOrFail($id);
-        $cart = $order->orderDetails;
-        // Xóa các chi tiết đơn hàng liên quan
-        foreach ($cart as $item) {
-            $item->delete();
-        }
+        $order->orderDetails()->delete(); // Xóa tất cả các chi tiết đơn hàng liên quan đến đơn hàng này
         // Xóa đơn hàng
         $order->delete();
 
@@ -59,10 +56,14 @@ class OrderController extends Controller
     public function updateCart($idOrder, $idCart, Request $request)
     {
         if (!$request->has('quantity')) {
-            return response()->json(['message' => 'Missing quantity or product_price'], 400);
+            return response()->json(['message' => 'Missing quantity'], 400);
         }
         $order = Order::findOrFail($idOrder);
-        $cartItem = $order->orderDetails()->where('id', $idCart)->firstOrFail();
+        $cartItem = $order->orderDetails->where('id', $idCart)->first();
+        // kiểm tra xem có cartItem tồn tại không 
+        if (!$cartItem) {
+            return response()->json(['message' => 'Cart item not found'], 404);
+        }
         $cartItem->quantity = $request->quantity;
         $cartItem->total_price = $cartItem->product_price * $request->quantity; // Cập nhật giá sản phẩm nếu cần
         $cartItem->save();
@@ -82,10 +83,14 @@ class OrderController extends Controller
     public function deleteCart($idOrder, $idCart)
     {
         $order = Order::findOrFail($idOrder);
-        $itemInCart = $order->orderDetails();
-        $cartItem = $itemInCart->where('id', $idCart)->firstOrFail();
+        $itemInCart = $order->orderDetails;
+        $cartItem = $itemInCart->where('id', $idCart)->first();
+        // kiểm tra xem có cartItem tồn tại không 
+        if (!$cartItem) {
+            return response()->json(['message' => 'Cart item not found'], 404);
+        }
         // Kiểm tra nếu chỉ còn 1 sản phẩm thì không cho xóa
-        if ($order->orderDetails()->count() <= 1) {
+        if ($itemInCart->count() <= 1) {
             return response()->json(['message' => 'Cannot delete the last item in the cart'], 400);
         }
 
