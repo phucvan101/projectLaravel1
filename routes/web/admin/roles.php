@@ -8,14 +8,14 @@ Route::prefix('roles')->group(function () {
     Route::get('/', [
         'as' => 'roles.index',
         'uses' => 'App\Http\Controllers\RoleAdminController@index',
-        // 'middleware' => 'can:role_list'
+        'middleware' => 'can:role_list'
     ]);
 
     // route : display add roles
     Route::get('/create', [
         'as' => 'roles.create',
         'uses' => 'App\Http\Controllers\RoleAdminController@create',
-        // 'middleware' => 'can:role_add'
+        'middleware' => 'can:role_add'
 
     ]);
 
@@ -29,7 +29,7 @@ Route::prefix('roles')->group(function () {
     Route::get('/edit/{id}', [
         'as' => 'roles.edit',
         'uses' => 'App\Http\Controllers\RoleAdminController@edit',
-        // 'middleware' => 'can:role_edit'
+        'middleware' => 'can:role_edit'
 
     ]);
 
@@ -43,7 +43,7 @@ Route::prefix('roles')->group(function () {
     Route::get('/delete/{id}', [
         'as' => 'roles.delete',
         'uses' => 'App\Http\Controllers\RoleAdminController@delete',
-        // 'middleware' => 'can:role_delete'
+        'middleware' => 'can:role_delete'
 
     ]);
 
