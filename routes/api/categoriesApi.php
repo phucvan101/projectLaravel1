@@ -8,7 +8,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('categories/{category}', [App\Http\Controllers\Api\CategoryController::class, 'show']);
     Route::post('categories', [App\Http\Controllers\Api\CategoryController::class, 'store'])
         ->middleware('can:category_add');
-    Route::put('categories/{category}', [App\Http\Controllers\Api\CategoryController::class, 'update']);
+    Route::post('categories/{category}', [App\Http\Controllers\Api\CategoryController::class, 'update']);
     Route::delete('categories/{category}', [App\Http\Controllers\Api\CategoryController::class, 'destroy'])
         ->middleware('can:category_delete');
 });

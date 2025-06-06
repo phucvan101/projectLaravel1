@@ -16,10 +16,9 @@ Route::middleware('auth:sanctum')->group(function () {
         ->middleware('can:product_add');
 
     // Sửa sản phẩm
-    Route::put('products/{product}', [App\Http\Controllers\Api\ProductController::class, 'update'])
+    Route::post('products/{product}', [App\Http\Controllers\Api\ProductController::class, 'update'])
         ->middleware('can:product_edit');
-    Route::patch('products/{product}', [App\Http\Controllers\Api\ProductController::class, 'update'])
-        ->middleware('can:product_edit');
+
 
     // Xóa sản phẩm
     Route::delete('products/{product}', [App\Http\Controllers\Api\ProductController::class, 'destroy'])
